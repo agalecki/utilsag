@@ -1,5 +1,5 @@
 
-univariateStats <- function(data, fun){
+univariateStat <- function(data, fun){
 dscLs <- lapply(data, FUN = fun)
 nms <- names(dscLs)        # Variable names
 rsDt <- NULL 
@@ -10,5 +10,7 @@ for (i in seq_along(dscLs)){
  if (!is.null(tmp)) rownames(tmp) <- nmsi
  rsDt <- rbind(rsDt, tmp)
 }
+colnames(rsDt) <- as.character(substitute(fun))
 rsDt
 }
+
