@@ -1,7 +1,7 @@
 # export(modifyPackageNamespace)
 ## export(.traceFunction, traceOptions, tracePrint, traceList)
 # Generics for which we define new methods:
-export(write.Rd, univariateStat)
+export(write.Rd, univariateStat,Dropbox.path)
 export(utraceRinit, utraceRprint, utraceRlist)
 
 S3method(write.Rd, data.frame)  # Writes skeleton documentation for data frame
