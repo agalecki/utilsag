@@ -11,7 +11,7 @@ dropbox_pth <- sapply(nms, FUN= function(x){
      ex <-file_content[[x]]
      file.path(ex$path)
      })
-if (length(dropbox_pth) == 0) then {
+if (length(dropbox_pth) == 0) {
    message ("Dropbox not found")    
      } else {
 assign(".Dropbox.path", dropbox_pth, envir = .GlobalEnv)
