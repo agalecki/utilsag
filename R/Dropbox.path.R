@@ -19,7 +19,5 @@ message(".Dropbox.path: ", .Dropbox.path)
 }
 invisible(dropbox_pth)
 }
-Dropbox.path()   # Path to ersonal dropbox by default
-
-
-.Dropbox.path
+# Dropbox.path()   # Vector with paths to Dropbox (both personal and business) 
+# .Dropbox.path
