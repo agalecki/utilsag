@@ -1,6 +1,6 @@
 Dropbox.path <- function () {
 ## see https://stackoverflow.com/questions/35985167/determining-the-dropbox-path-in-r
-# By default returns path to Dropbox
+## https://help.dropbox.com/installs-integrations/desktop/locate-dropbox-folder
 
 appath <-  file.path(Sys.getenv(x = "LOCALAPPDATA"), "Dropbox", "info.json")
 if (length(appath) == 0) appath <- file.path( Sys.getenv(x = "APPDATA"), "Dropbox", "info.json")
