@@ -19,5 +19,6 @@ univariateStat(cars, min)       # Returns min for every variable in cars
 
 ## Examples
 
-ef <- system.file("examples", package = "utilsag")
+ex <- system.file("examples", package = "utilsag")
 
+source(
