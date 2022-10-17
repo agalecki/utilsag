@@ -1,8 +1,3 @@
-#' @export
-mytidy <- function(x, ...) {
-UseMethod("mytidy")
-}
-
 
 #' -@templateVar class glmnet
 #'
