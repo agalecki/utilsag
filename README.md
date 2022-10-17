@@ -20,9 +20,9 @@ path <- "./examples"
 ex1 <- paste0(path,"/ex1-cva.R")
 source(ex1)
 mytidy(cva)
-utilsag:::mytidy.cva.glmnet(cva, extract = "mod")
-utilsag:::mytidy.cva.glmnet(cva, extract = "cva.summ")
-utilsag:::mytidy.cva.glmnet(cva, extract = "mod.summ")
+mytidy(cva, extract = "mod")
+mytidy(cva, extract = "cva.summ")
+mytidy(cva, extract = "mod.summ")
 
 
 

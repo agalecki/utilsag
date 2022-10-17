@@ -1,3 +1,9 @@
+#' mytidyline1
+#'
+#' mytidyline2
+#'
+#' @name mytidy 
+#' @rdname mytidy 
 #' @export
 mytidy <- function(x, ...) {
 UseMethod("mytidy")
