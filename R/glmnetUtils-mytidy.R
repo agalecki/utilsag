@@ -27,7 +27,7 @@
 #'   may be very wide) and therefore combining predictions with it is not
 #'   logical. Furthermore, predictions make sense only with a specific
 #'   choice of lambda.
-#'
+#' @export
 
 mytidy.cva.glmnet <- function(x, extract = c("cva", "mod", "cva.summ", "mod.summ"), return_zeros = FALSE, ...){
   # estimate := cvm

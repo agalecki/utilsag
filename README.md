@@ -11,14 +11,14 @@ library("devtools"); install_github("agalecki/utilsag")
 
 ## Examples
 
-# Path to `examples` folder
-path <- system.file("examples", package = "utilsag")
+# Path to `examples` folder (choose)
+#path <- system.file("examples", package = "utilsag")
 path <- "./examples"
 
 # Ex1. mytidy for cva object (glmnetUtils)
 ex1 <- paste0(path,"/ex1-cva.R")
 source(ex1)
-utilsag:::mytidy.cva.glmnet(cva)
+mytidy(cva)
 utilsag:::mytidy.cva.glmnet(cva, extract = "mod")
 utilsag:::mytidy.cva.glmnet(cva, extract = "cva.summ")
 utilsag:::mytidy.cva.glmnet(cva, extract = "mod.summ")
