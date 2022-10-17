@@ -6,6 +6,7 @@ Utility functions for internal use
 
 * Development version from Github:
 ```
+detach(package:utilsag)
 library("devtools"); install_github("agalecki/utilsag")
 ```
 
@@ -23,7 +24,7 @@ utilsag:::mytidy.cva.glmnet(cva, extract = "mod")
 utilsag:::mytidy.cva.glmnet(cva, extract = "cva.summ")
 utilsag:::mytidy.cva.glmnet(cva, extract = "mod.summ")
 
-detach(package:utilsag)
+
 
 
 ## syntax
