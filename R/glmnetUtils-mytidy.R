@@ -1,3 +1,34 @@
+#' -@templateVar class glmnet
+#'
+#' -@template title_desc_tidy
+#'
+#' @param x A `cva.glmnet` object returned from [glmnetUtils::cva.glmnet()].
+#' @param return_zeros Logical indicating whether coefficients with value zero
+#'   zero should be included in the results. Defaults to `FALSE`.
+#' - @template param_unused_dots
+#'
+#' @evalRd broom:::return_tidy(
+#'   "step",
+#'   step.label = "Label used by `glmnet`. It refers to column name in a matrix of coefficients. See example.",
+#'   "term",
+#'   "estimate",
+#'   "lambda",
+#'   "dev.ratio",
+#'   df  = "The number of nonzero coefficients for each value of lambda. For multnet, the number
+#'      of variables with a nonzero coefficient for any class."
+#' )
+#'
+#' @details Note that while this representation of GLMs is much easier
+#'   to plot and combine than the default structure, it is also much
+#'   more memory-intensive. Do not use for large, sparse matrices.
+#'
+#'   No `augment` method is yet provided even though the model produces
+#'   predictions, because the input data is not tidy (it is a matrix that
+#'   may be very wide) and therefore combining predictions with it is not
+#'   logical. Furthermore, predictions make sense only with a specific
+#'   choice of lambda.
+#'
+
 mytidy.cva.glmnet <- function(x, extract = c("cva", "mod", "cva.summ", "mod.summ"), return_zeros = FALSE, ...){
   # estimate := cvm
   # 
