@@ -1,3 +1,9 @@
+#' @export
+mytidy <- function(x, ...) {
+UseMethod("mytidy")
+}
+
+
 #' -@templateVar class glmnet
 #'
 #' -@template title_desc_tidy
