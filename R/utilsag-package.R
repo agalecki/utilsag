@@ -13,6 +13,6 @@
 #' ```
 #'  and locate `utilsag` package 
 ## assorted imports from base packages
-#' - ??@importFrom glmnetUtils minlossplot
+##' - ??@importFrom glmnetUtils minlossplot
 #' @keywords internal
 "_PACKAGE"

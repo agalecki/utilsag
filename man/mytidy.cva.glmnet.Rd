@@ -14,7 +14,7 @@
 \arguments{
 \item{x}{A \code{cva.glmnet} object returned from \code{\link[glmnetUtils:cva.glmnet]{glmnetUtils::cva.glmnet()}}.}
 
-\item{return_zeros}{Logical indicating whether coefficients with value zero
+\item{`return_zeros`}{Logical indicating whether coefficients with value zero
 zero should be included in the results. Defaults to \code{FALSE}.
 \itemize{
 \item @template param_unused_dots
@@ -42,7 +42,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{step}{Which step of lambda choices was used.}
   \item{term}{The name of the regression term.}
   \item{step.label}{Label used by `glmnet`. It refers to column name in a matrix of coefficients. See example.}
-  \item{df}{The number of nonzero coefficients for each value of lambda. For multnet, the number
+  \item{df.step}{The number of nonzero coefficients for each value of lambda. For multnet, the number
      of variables with a nonzero coefficient for any class.}
 
 }

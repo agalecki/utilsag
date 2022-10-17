@@ -1,10 +1,21 @@
+#' 
+#' @method myglance cva.glmnet
+#' @export
+myglance.cva.glmnet <- function(x){
+ ret <- broom:::as_glance_tibble(
+    oclass  = paste0(class(x), collapse =" "),
+    n_alpha = length(x$alpha),
+    n_folds = x$nfolds,
+    na_types ="cii")
+return(ret)
+}
 
 #' -@templateVar class glmnet
 #'
 #' -@template title_desc_tidy
 #'
 #' @param x A `cva.glmnet` object returned from [glmnetUtils::cva.glmnet()].
-#' @param return_zeros Logical indicating whether coefficients with value zero
+#' @param `return_zeros` Logical indicating whether coefficients with value zero
 #'   zero should be included in the results. Defaults to `FALSE`.
 #' - @template param_unused_dots
 #'
@@ -15,7 +26,7 @@
 #'   "estimate",
 #'   "lambda",
 #'   "dev.ratio",
-#'   df  = "The number of nonzero coefficients for each value of lambda. For multnet, the number
+#'   df.step  = "The number of nonzero coefficients for each value of lambda. For multnet, the number
 #'      of variables with a nonzero coefficient for any class."
 #' )
 #'
