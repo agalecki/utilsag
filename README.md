@@ -23,4 +23,9 @@ path <- system.file("examples", package = "utilsag")
 path <- "./examples"
 ex1 <- paste0(path,"/ex1-cva.R")
 source(ex1)
+utilsag:::mytidy.cva.glmnet(cva)
+utilsag:::mytidy.cva.glmnet(cva, extract = "mod")
+utilsag:::mytidy.cva.glmnet(cva, extract = "cva.summ")
+utilsag:::mytidy.cva.glmnet(cva, extract = "mod.summ")
+
 detach(package:utilsag)

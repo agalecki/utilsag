@@ -18,8 +18,7 @@ mytidy.cva.glmnet <- function(x, extract = c("cva", "mod", "cva.summ", "mod.summ
        if (extract == "cva") dti <- dti %>% mutate(step = 1:nrow(dti)) 
        dtlist[[i]] <- dti
      }
-     
-     ret <- dplyr::bind_rows(dtlist) %>% relocate (alpha, lambda) %>% 
-        relocate(step, lambda, .after = alpha) %>% arrange(alpha, step)                    
+     ret <- dplyr::bind_rows(dtlist) %>% relocate (alpha) %>% 
+         arrange(alpha)                    
  return(as_tibble(ret))
 }

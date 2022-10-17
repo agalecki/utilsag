@@ -1,5 +1,7 @@
 rm(list = ls())
+library(glmnetUtils)
 cva <- cva.glmnet(mpg ~ ., data=mtcars)
 str(cva)
 library(broom)
-mytidy.cva.glmnet(cva)
+library(tidyr)
+library(dplyr)
