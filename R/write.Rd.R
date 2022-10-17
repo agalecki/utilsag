@@ -1,11 +1,10 @@
+#' write.Rd
+#'
+#' ??
+#'
+#' export
 write.Rd <- function(object, ...) UseMethod("write.Rd")
-write.Rd.data.frame <- function(object, ...,dir.path = getwd(), package=""){
- #srch <- search()
- #tmp <- paste("package:", package, collapse="", sep="")
- #insrch <- tmp %in% srch
- #if (!insrch) warning("Package ", package, " not in search path")
- 
- 
+write.Rd.data.frame <- function(object, ...,dir.path = getwd(), package=""){ 
  dfn <- as.character(substitute(object))
  
  dm <- dim(object)    # Dimensions
@@ -16,12 +15,11 @@ write.Rd.data.frame <- function(object, ...,dir.path = getwd(), package=""){
     th <- stdout()   #  to terminal
  } else {
  
- fp1 <- dir.path    # Path, for example g 
+ fp1 <- dir.path    # Path, for example
  tp2 <- paste(dfn,".Rd", collapse="",sep="")
  fpath <- file.path(fp1, tp2)
  th <- file(fpath, open="w")
  }
- 
  
  tt <- paste("% ",package,"/man/",dfn,".Rd", sep="")
  writeLines(tt,th)
@@ -58,8 +56,6 @@ write.Rd.data.frame <- function(object, ...,dir.path = getwd(), package=""){
  # Usage
  tt <- paste("\\usage{data(", dfn, ")}",sep ="")
  writeLines(tt, th)
-
-
 
  # Format
  tt <- "\\format{"

@@ -6,7 +6,7 @@ Author: Andrzej Galecki <agalecki@umich.edu>
 Maintainer: Andrzej Galecki <agalecki@umich.edu>
 Title: Datasets and utility functions.
 Description: Datasets and utilty functions 
-Depends: reshape, R (>= 2.10.1)
+Depends: reshape, R (>= 4.0.0)
 Imports: 
     stringr,
     lattice,
@@ -20,5 +20,3 @@ Encoding: UTF-8
 LazyData: true
 Suggests:
     testthat (>= 3.0.0)
-Depends:
-    R (>= 4.0.0)

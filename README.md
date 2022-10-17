@@ -19,6 +19,8 @@ univariateStat(cars, min)       # Returns min for every variable in cars
 
 ## Examples
 
-ex <- system.file("examples", package = "utilsag")
-
-source(
+path <- system.file("examples", package = "utilsag")
+path <- "./examples"
+ex1 <- paste0(path,"/ex1-cva.R")
+source(ex1)
+detach(package:utilsag)

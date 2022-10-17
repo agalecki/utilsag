@@ -1,4 +1,4 @@
-tidyx.cva.glmnet <- function(x, extract = c("cva", "mod", "cva.summ", "mod.summ"), return_zeros = FALSE, ...){
+mytidy.cva.glmnet <- function(x, extract = c("cva", "mod", "cva.summ", "mod.summ"), return_zeros = FALSE, ...){
   # estimate := cvm
   # 
   extract <- match.arg(extract)
