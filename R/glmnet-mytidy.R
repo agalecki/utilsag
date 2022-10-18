@@ -67,12 +67,12 @@ mytidy_glmnet_dev <- function(x){
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha = 1
  len <- length(x$lambda)
- ret <- tibble( list(alpha = rep(alpha,len), 
+ ret <- tibble( alpha = alpha, 
                      step = 1:len,
                      lambda = x$lambda, 
                      dev.ratio = x$dev.ratio,
                      df = x$df
-                     ), .name_repair = "minimal"
+                     , .name_repair = "minimal"
               )
  return(ret)
 }

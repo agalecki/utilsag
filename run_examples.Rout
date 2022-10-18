@@ -20,7 +20,7 @@ Type 'q()' to quit R.
 >  
 > 
 > devtools::install_github("agalecki/utilsag")
-Skipping install of 'utilsag' from a github remote, the SHA1 (e25df017) has not changed since last install.
+Skipping install of 'utilsag' from a github remote, the SHA1 (48e02b8b) has not changed since last install.
   Use `force = TRUE` to force installation
 > path <- "C:/Users/agalecki/Documents/GitHub/utilsag/examples"
 > 
@@ -39,7 +39,7 @@ x purrr::discard() masks scales::discard()
 x dplyr::filter()  masks stats::filter()
 x dplyr::lag()     masks stats::lag()
 x recipes::step()  masks stats::step()
-* Search for functions across packages at https://www.tidymodels.org/find/
+* Learn how to get started at https://www.tidymodels.org/start/
 > library(utilsag)
 Version: 0.0.5. Built on: 2022-10-18
 > 
@@ -75,7 +75,7 @@ Loaded glmnet 4.1-4
 # A tibble: 5 x 1
   `list(...)` 
   <named list>
-1 <dbl [1]>   
+1 <dbl [51]>  
 2 <int [51]>  
 3 <dbl [51]>  
 4 <dbl [51]>  
@@ -84,4 +84,4 @@ Loaded glmnet 4.1-4
 > 
 > proc.time()
    user  system elapsed 
-   2.57    0.67    3.45 
+   2.76    0.53    3.46 
