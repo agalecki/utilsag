@@ -21,6 +21,9 @@ methods(mytidy)
 #path <- system.file("examples", package = "utilsag")
 path <- "./examples"
 
+library(tidymodels)
+library(utilsag)
+
 # Ex1. mytidy for cva object (glmnetUtils)
 ex1 <- paste0(path,"/ex1-glmnet.R")
 source(ex1)

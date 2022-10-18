@@ -6,8 +6,7 @@ Author: Andrzej Galecki <agalecki@umich.edu>
 Maintainer: Andrzej Galecki <agalecki@umich.edu>
 Title: Datasets and utility functions.
 Description: Datasets and utilty functions 
-Depends: 
-    reshape, 
+Depends:  
     R (>= 4.0.0)
 Imports: 
     broom,

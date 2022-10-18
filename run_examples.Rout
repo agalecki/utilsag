@@ -1,0 +1,80 @@
+
+R version 4.1.3 (2022-03-10) -- "One Push-Up"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+>  
+> 
+> devtools::install_github("agalecki/utilsag")
+Skipping install of 'utilsag' from a github remote, the SHA1 (bdb65328) has not changed since last install.
+  Use `force = TRUE` to force installation
+> path <- "C:/Users/agalecki/Documents/GitHub/utilsag/examples"
+> 
+> library(tidymodels)
+-- Attaching packages -------------------------------------- tidymodels 1.0.0 --
+v broom        1.0.1      v recipes      1.0.1 
+v dials        1.0.0      v rsample      1.1.0 
+v dplyr        1.0.10     v tibble       3.1.8 
+v ggplot2      3.3.6      v tidyr        1.2.1 
+v infer        1.0.3      v tune         1.0.0 
+v modeldata    1.0.1      v workflows    1.1.0 
+v parsnip      1.0.2      v workflowsets 1.0.0 
+v purrr        0.3.5      v yardstick    1.1.0 
+-- Conflicts ----------------------------------------- tidymodels_conflicts() --
+x purrr::discard() masks scales::discard()
+x dplyr::filter()  masks stats::filter()
+x dplyr::lag()     masks stats::lag()
+x recipes::step()  masks stats::step()
+* Dig deeper into tidy modeling with R at https://www.tmwr.org
+> library(utilsag)
+Loading required package: reshape
+
+Attaching package: 'reshape'
+
+The following objects are masked from 'package:tidyr':
+
+    expand, smiths
+
+The following object is masked from 'package:dplyr':
+
+    rename
+
+Version: 0.0.5. Built on: 2022-10-18
+> 
+> # Ex1. mytidy for cva object (glmnetUtils)
+> ex1 <- paste0(path,"/ex1-glmnet.R")
+> source(ex1)
+Loading required package: Matrix
+
+Attaching package: 'Matrix'
+
+The following object is masked from 'package:reshape':
+
+    expand
+
+The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack
+
+Loaded glmnet 4.1-4
+> mytidy(fit_cox, what = "dev")
+Error in seq_len(nrow(x)) : 
+  argument must be coercible to non-negative integer
+Calls: mytidy -> mytidy.glmnet -> mytidy_glmnet_dev -> <Anonymous>
+In addition: Warning message:
+In seq_len(nrow(x)) : first element used of 'length.out' argument
+Execution halted
