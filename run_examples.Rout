@@ -20,7 +20,7 @@ Type 'q()' to quit R.
 >  
 > 
 > devtools::install_github("agalecki/utilsag")
-Skipping install of 'utilsag' from a github remote, the SHA1 (b13b6a06) has not changed since last install.
+Skipping install of 'utilsag' from a github remote, the SHA1 (e25df017) has not changed since last install.
   Use `force = TRUE` to force installation
 > path <- "C:/Users/agalecki/Documents/GitHub/utilsag/examples"
 > 
@@ -39,7 +39,7 @@ x purrr::discard() masks scales::discard()
 x dplyr::filter()  masks stats::filter()
 x dplyr::lag()     masks stats::lag()
 x recipes::step()  masks stats::step()
-* Dig deeper into tidy modeling with R at https://www.tmwr.org
+* Search for functions across packages at https://www.tidymodels.org/find/
 > library(utilsag)
 Version: 0.0.5. Built on: 2022-10-18
 > 
@@ -72,5 +72,16 @@ Loaded glmnet 4.1-4
 10 V9        5   0.0623
 # ... with 686 more rows
 > mytidy(fit_cox, what = "dev")
-Error: 'as_tidy_tibble' is not an exported object from 'namespace:broom'
-Execution halted
+# A tibble: 5 x 1
+  `list(...)` 
+  <named list>
+1 <dbl [1]>   
+2 <int [51]>  
+3 <dbl [51]>  
+4 <dbl [51]>  
+5 <int [51]>  
+> 
+> 
+> proc.time()
+   user  system elapsed 
+   2.57    0.67    3.45 
