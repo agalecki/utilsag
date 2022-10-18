@@ -8,12 +8,10 @@ myglance.glmnet <- function(x){
  xcall <- as.list(x$call)
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha=1
- oclass <- paste0(class(x), collapse = ",")
- fam   <-  xcall$family
- if (is.null(fam)) fam <- "gaussian"
+ fam   <-  family(x)
  ret0 <- glance(x)
  ret <- ret0 %>% 
-    mutate(family = fam, n_lambda = length(x$lambda), alpha = alpha, oclass = oclass)
+    mutate(family = family(x), n_lambda = length(x$lambda), alpha = alpha)
 return(ret)
 }
 
@@ -68,11 +66,10 @@ mytidy_glmnet_dev <- function(x){
  if (is.null(alpha)) alpha = 1
  len <- length(x$lambda)
  ret <- tibble( alpha = alpha, 
-                     step = 1:len,
-                     lambda = x$lambda, 
-                     dev.ratio = x$dev.ratio,
-                     df = x$df
-                     , .name_repair = "minimal"
+                step = 1:len,
+                lambda = x$lambda, 
+                dev.ratio = x$dev.ratio,
+                df = x$df
               )
  return(ret)
 }

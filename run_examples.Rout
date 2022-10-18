@@ -20,8 +20,89 @@ Type 'q()' to quit R.
 >  
 > 
 > devtools::install_github("agalecki/utilsag")
-Skipping install of 'utilsag' from a github remote, the SHA1 (48e02b8b) has not changed since last install.
-  Use `force = TRUE` to force installation
+Downloading GitHub repo agalecki/utilsag@HEAD
+digest  (0.6.29 -> 0.6.30) [CRAN]
+stringi (1.7.6  -> 1.7.8 ) [CRAN]
+Installing 2 packages: digest, stringi
+Installing packages into 'C:/Users/agalecki/R_library'
+(as 'lib' is unspecified)
+
+  There are binary versions available but the source versions are later:
+        binary source needs_compilation
+digest  0.6.29 0.6.30              TRUE
+stringi  1.7.6  1.7.8              TRUE
+
+installing the source packages 'digest', 'stringi'
+
+trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.30.tar.gz'
+Content type 'application/x-gzip' length 163424 bytes (159 KB)
+==================================================
+downloaded 159 KB
+
+trying URL 'https://cloud.r-project.org/src/contrib/stringi_1.7.8.tar.gz'
+Content type 'application/x-gzip' length 8032287 bytes (7.7 MB)
+==================================================
+downloaded 7.7 MB
+
+* installing *source* package 'digest' ...
+** package 'digest' successfully unpacked and MD5 sums checked
+ERROR: cannot remove earlier installation, is it in use?
+* removing 'C:/Users/agalecki/R_library/digest'
+* restoring previous 'C:/Users/agalecki/R_library/digest'
+Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
+  problem copying C:\Users\agalecki\R_library\00LOCK-digest\digest\libs\x64\digest.dll to C:\Users\agalecki\R_library\digest\libs\x64\digest.dll: Permission denied
+* installing *source* package 'stringi' ...
+** package 'stringi' successfully unpacked and MD5 sums checked
+ERROR: cannot remove earlier installation, is it in use?
+* removing 'C:/Users/agalecki/R_library/stringi'
+* restoring previous 'C:/Users/agalecki/R_library/stringi'
+Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
+  problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\icudt69l.dat to C:\Users\agalecki\R_library\stringi\libs\icudt69l.dat: Invalid argument
+Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
+  problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\x64\stringi.dll to C:\Users\agalecki\R_library\stringi\libs\x64\stringi.dll: Permission denied
+
+The downloaded source packages are in
+	'C:\Users\agalecki\AppData\Local\Temp\RtmpcPQik1\downloaded_packages'
+* checking for file 'C:\Users\agalecki\AppData\Local\Temp\RtmpcPQik1\remotes41581fdb6d2d\agalecki-utilsag-a09a992/DESCRIPTION' ... OK
+* preparing 'utilsag':
+* checking DESCRIPTION meta-information ... OK
+* checking for LF line-endings in source and make files and shell scripts
+* checking for empty or unneeded directories
+Omitted 'LazyData' from DESCRIPTION
+* building 'utilsag_0.0.5.tar.gz'
+
+Installing package into 'C:/Users/agalecki/R_library'
+(as 'lib' is unspecified)
+* installing *source* package 'utilsag' ...
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package 'utilsag'
+    finding HTML links ... done
+    myglance                                html  
+    mytidy                                  html  
+    mytidy.cva.glmnet                       html  
+    mytidy.glmnet                           html  
+    penAFT.cva                              html  
+    penAFT.cva.default                      html  
+    utilsag-package                         html  
+    write.Rd                                html  
+** building package indices
+** testing if installed package can be loaded from temporary location
+*** arch - i386
+*** arch - x64
+** testing if installed package can be loaded from final location
+*** arch - i386
+*** arch - x64
+** testing if installed package keeps a record of temporary installation path
+* DONE (utilsag)
+Warning messages:
+1: In i.p(...) : installation of package 'digest' had non-zero exit status
+2: In i.p(...) :
+  installation of package 'stringi' had non-zero exit status
 > path <- "C:/Users/agalecki/Documents/GitHub/utilsag/examples"
 > 
 > library(tidymodels)
@@ -72,16 +153,22 @@ Loaded glmnet 4.1-4
 10 V9        5   0.0623
 # ... with 686 more rows
 > mytidy(fit_cox, what = "dev")
-# A tibble: 5 x 1
-  `list(...)` 
-  <named list>
-1 <dbl [51]>  
-2 <int [51]>  
-3 <dbl [51]>  
-4 <dbl [51]>  
-5 <int [51]>  
+# A tibble: 51 x 5
+   alpha  step lambda dev.ratio    df
+   <dbl> <int>  <dbl>     <dbl> <int>
+ 1   0.5     1  0.474   0           0
+ 2   0.5     2  0.431   0.00137     1
+ 3   0.5     3  0.393   0.00444     3
+ 4   0.5     4  0.358   0.00805     3
+ 5   0.5     5  0.326   0.0113      3
+ 6   0.5     6  0.297   0.0151      4
+ 7   0.5     7  0.271   0.0185      4
+ 8   0.5     8  0.247   0.0216      4
+ 9   0.5     9  0.225   0.0243      5
+10   0.5    10  0.205   0.0275      6
+# ... with 41 more rows
 > 
 > 
 > proc.time()
    user  system elapsed 
-   2.76    0.53    3.46 
+   5.68    2.04   27.62 
