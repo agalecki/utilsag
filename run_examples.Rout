@@ -20,99 +20,8 @@ Type 'q()' to quit R.
 >  
 > 
 > devtools::install_github("agalecki/utilsag")
-Downloading GitHub repo agalecki/utilsag@HEAD
-isoband (0.2.5  -> 0.2.6 ) [CRAN]
-digest  (0.6.29 -> 0.6.30) [CRAN]
-stringi (1.7.6  -> 1.7.8 ) [CRAN]
-Installing 3 packages: isoband, digest, stringi
-Installing packages into 'C:/Users/agalecki/R_library'
-(as 'lib' is unspecified)
-
-  There are binary versions available but the source versions are later:
-        binary source needs_compilation
-digest  0.6.29 0.6.30              TRUE
-stringi  1.7.6  1.7.8              TRUE
-
-trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.1/isoband_0.2.6.zip'
-Content type 'application/zip' length 2729161 bytes (2.6 MB)
-==================================================
-downloaded 2.6 MB
-
-package 'isoband' successfully unpacked and MD5 sums checked
-
-The downloaded binary packages are in
-	C:\Users\agalecki\AppData\Local\Temp\Rtmp8AKyVm\downloaded_packages
-installing the source packages 'digest', 'stringi'
-
-trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.30.tar.gz'
-Content type 'application/x-gzip' length 163424 bytes (159 KB)
-==================================================
-downloaded 159 KB
-
-trying URL 'https://cloud.r-project.org/src/contrib/stringi_1.7.8.tar.gz'
-Content type 'application/x-gzip' length 8032287 bytes (7.7 MB)
-==================================================
-downloaded 7.7 MB
-
-* installing *source* package 'digest' ...
-** package 'digest' successfully unpacked and MD5 sums checked
-ERROR: cannot remove earlier installation, is it in use?
-* removing 'C:/Users/agalecki/R_library/digest'
-* restoring previous 'C:/Users/agalecki/R_library/digest'
-Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
-  problem copying C:\Users\agalecki\R_library\00LOCK-digest\digest\libs\x64\digest.dll to C:\Users\agalecki\R_library\digest\libs\x64\digest.dll: Permission denied
-* installing *source* package 'stringi' ...
-** package 'stringi' successfully unpacked and MD5 sums checked
-ERROR: cannot remove earlier installation, is it in use?
-* removing 'C:/Users/agalecki/R_library/stringi'
-* restoring previous 'C:/Users/agalecki/R_library/stringi'
-Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
-  problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\icudt69l.dat to C:\Users\agalecki\R_library\stringi\libs\icudt69l.dat: Invalid argument
-Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
-  problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\x64\stringi.dll to C:\Users\agalecki\R_library\stringi\libs\x64\stringi.dll: Permission denied
-
-The downloaded source packages are in
-	'C:\Users\agalecki\AppData\Local\Temp\Rtmp8AKyVm\downloaded_packages'
-* checking for file 'C:\Users\agalecki\AppData\Local\Temp\Rtmp8AKyVm\remotes3bc85b9d68be\agalecki-utilsag-b13b6a0/DESCRIPTION' ... OK
-* preparing 'utilsag':
-* checking DESCRIPTION meta-information ... OK
-* checking for LF line-endings in source and make files and shell scripts
-* checking for empty or unneeded directories
-Omitted 'LazyData' from DESCRIPTION
-* building 'utilsag_0.0.5.tar.gz'
-
-Installing package into 'C:/Users/agalecki/R_library'
-(as 'lib' is unspecified)
-* installing *source* package 'utilsag' ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package 'utilsag'
-    finding HTML links ... done
-    myglance                                html  
-    mytidy                                  html  
-    mytidy.cva.glmnet                       html  
-    mytidy.glmnet                           html  
-    penAFT.cva                              html  
-    penAFT.cva.default                      html  
-    utilsag-package                         html  
-    write.Rd                                html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-*** arch - i386
-*** arch - x64
-** testing if installed package can be loaded from final location
-*** arch - i386
-*** arch - x64
-** testing if installed package keeps a record of temporary installation path
-* DONE (utilsag)
-Warning messages:
-1: In i.p(...) : installation of package 'digest' had non-zero exit status
-2: In i.p(...) :
-  installation of package 'stringi' had non-zero exit status
+Skipping install of 'utilsag' from a github remote, the SHA1 (b13b6a06) has not changed since last install.
+  Use `force = TRUE` to force installation
 > path <- "C:/Users/agalecki/Documents/GitHub/utilsag/examples"
 > 
 > library(tidymodels)
@@ -130,7 +39,7 @@ x purrr::discard() masks scales::discard()
 x dplyr::filter()  masks stats::filter()
 x dplyr::lag()     masks stats::lag()
 x recipes::step()  masks stats::step()
-* Learn how to get started at https://www.tidymodels.org/start/
+* Dig deeper into tidy modeling with R at https://www.tmwr.org
 > library(utilsag)
 Version: 0.0.5. Built on: 2022-10-18
 > 
@@ -146,6 +55,22 @@ The following objects are masked from 'package:tidyr':
     expand, pack, unpack
 
 Loaded glmnet 4.1-4
+> mytidy(fit_cox)
+# A tibble: 696 x 3
+# Groups:   step [50]
+   term   step estimate
+   <chr> <dbl>    <dbl>
+ 1 V6        2  -0.0247
+ 2 V1        3   0.0222
+ 3 V6        3  -0.0507
+ 4 V9        3   0.0121
+ 5 V1        4   0.0470
+ 6 V6        4  -0.0765
+ 7 V9        4   0.0378
+ 8 V1        5   0.0709
+ 9 V6        5  -0.101 
+10 V9        5   0.0623
+# ... with 686 more rows
 > mytidy(fit_cox, what = "dev")
 Error: 'as_tidy_tibble' is not an exported object from 'namespace:broom'
 Execution halted
