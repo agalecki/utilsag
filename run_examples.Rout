@@ -62,8 +62,8 @@ Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
   problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\x64\stringi.dll to C:\Users\agalecki\R_library\stringi\libs\x64\stringi.dll: Permission denied
 
 The downloaded source packages are in
-	'C:\Users\agalecki\AppData\Local\Temp\RtmpcPQik1\downloaded_packages'
-* checking for file 'C:\Users\agalecki\AppData\Local\Temp\RtmpcPQik1\remotes41581fdb6d2d\agalecki-utilsag-a09a992/DESCRIPTION' ... OK
+	'C:\Users\agalecki\AppData\Local\Temp\RtmpCQT80z\downloaded_packages'
+* checking for file 'C:\Users\agalecki\AppData\Local\Temp\RtmpCQT80z\remotes417c42926dfb\agalecki-utilsag-114e502/DESCRIPTION' ... OK
 * preparing 'utilsag':
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -171,4 +171,4 @@ Loaded glmnet 4.1-4
 > 
 > proc.time()
    user  system elapsed 
-   5.68    2.04   27.62 
+   5.39    1.93   27.18 

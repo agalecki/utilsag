@@ -27,4 +27,21 @@ y_cox = cbind(time = ty, status = 1 - tcens)  # y=Surv(ty,1-tcens) with library(
 fit_cox = glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
 
 
+myglance(fit1)  coef by default
+mytidy(fit1)
+mytidy(fit1, what = "dev")
+
+myglance(fit3)
+mytidy(fit3)
+mytidy(fit3, what = "dev")
+
+myglance(fit3a)
+mytidy(fit3a)
+mytidy(fit3a, what = "dev")
+
+
+myglance(fit_cox)
+mytidy(fit_cox)
+mytidy(fit_cox, what = "dev")
+
 
