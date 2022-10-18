@@ -26,8 +26,7 @@ tcens = rbinom(n = N, prob = 0.3, size = 1)  # censoring indicator
 y_cox = cbind(time = ty, status = 1 - tcens)  # y=Surv(ty,1-tcens) with library(survival)
 fit_cox = glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
 
-
-myglance(fit1)  coef by default
+myglance(fit1)  # coef by default
 mytidy(fit1)
 mytidy(fit1, what = "dev")
 
@@ -39,9 +38,10 @@ myglance(fit3a)
 mytidy(fit3a)
 mytidy(fit3a, what = "dev")
 
-
 myglance(fit_cox)
 mytidy(fit_cox)
 mytidy(fit_cox, what = "dev")
+
+
 
 

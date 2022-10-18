@@ -8,7 +8,7 @@ library(utilsag)
 
 # Ex1. mytidy for cva object (glmnetUtils)
 ex1 <- paste0(path,"/ex1-glmnet.R")
-source(ex1)
+source(ex1,echo = TRUE)
 mytidy(fit_cox)
 mytidy(fit_cox, what = "dev")
 

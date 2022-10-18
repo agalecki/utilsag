@@ -20,89 +20,8 @@ Type 'q()' to quit R.
 >  
 > 
 > devtools::install_github("agalecki/utilsag")
-Downloading GitHub repo agalecki/utilsag@HEAD
-digest  (0.6.29 -> 0.6.30) [CRAN]
-stringi (1.7.6  -> 1.7.8 ) [CRAN]
-Installing 2 packages: digest, stringi
-Installing packages into 'C:/Users/agalecki/R_library'
-(as 'lib' is unspecified)
-
-  There are binary versions available but the source versions are later:
-        binary source needs_compilation
-digest  0.6.29 0.6.30              TRUE
-stringi  1.7.6  1.7.8              TRUE
-
-installing the source packages 'digest', 'stringi'
-
-trying URL 'https://cloud.r-project.org/src/contrib/digest_0.6.30.tar.gz'
-Content type 'application/x-gzip' length 163424 bytes (159 KB)
-==================================================
-downloaded 159 KB
-
-trying URL 'https://cloud.r-project.org/src/contrib/stringi_1.7.8.tar.gz'
-Content type 'application/x-gzip' length 8032287 bytes (7.7 MB)
-==================================================
-downloaded 7.7 MB
-
-* installing *source* package 'digest' ...
-** package 'digest' successfully unpacked and MD5 sums checked
-ERROR: cannot remove earlier installation, is it in use?
-* removing 'C:/Users/agalecki/R_library/digest'
-* restoring previous 'C:/Users/agalecki/R_library/digest'
-Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
-  problem copying C:\Users\agalecki\R_library\00LOCK-digest\digest\libs\x64\digest.dll to C:\Users\agalecki\R_library\digest\libs\x64\digest.dll: Permission denied
-* installing *source* package 'stringi' ...
-** package 'stringi' successfully unpacked and MD5 sums checked
-ERROR: cannot remove earlier installation, is it in use?
-* removing 'C:/Users/agalecki/R_library/stringi'
-* restoring previous 'C:/Users/agalecki/R_library/stringi'
-Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
-  problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\icudt69l.dat to C:\Users\agalecki\R_library\stringi\libs\icudt69l.dat: Invalid argument
-Warning in file.copy(lp, dirname(pkgdir), recursive = TRUE, copy.date = TRUE) :
-  problem copying C:\Users\agalecki\R_library\00LOCK-stringi\stringi\libs\x64\stringi.dll to C:\Users\agalecki\R_library\stringi\libs\x64\stringi.dll: Permission denied
-
-The downloaded source packages are in
-	'C:\Users\agalecki\AppData\Local\Temp\RtmpCQT80z\downloaded_packages'
-* checking for file 'C:\Users\agalecki\AppData\Local\Temp\RtmpCQT80z\remotes417c42926dfb\agalecki-utilsag-114e502/DESCRIPTION' ... OK
-* preparing 'utilsag':
-* checking DESCRIPTION meta-information ... OK
-* checking for LF line-endings in source and make files and shell scripts
-* checking for empty or unneeded directories
-Omitted 'LazyData' from DESCRIPTION
-* building 'utilsag_0.0.5.tar.gz'
-
-Installing package into 'C:/Users/agalecki/R_library'
-(as 'lib' is unspecified)
-* installing *source* package 'utilsag' ...
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-  converting help for package 'utilsag'
-    finding HTML links ... done
-    myglance                                html  
-    mytidy                                  html  
-    mytidy.cva.glmnet                       html  
-    mytidy.glmnet                           html  
-    penAFT.cva                              html  
-    penAFT.cva.default                      html  
-    utilsag-package                         html  
-    write.Rd                                html  
-** building package indices
-** testing if installed package can be loaded from temporary location
-*** arch - i386
-*** arch - x64
-** testing if installed package can be loaded from final location
-*** arch - i386
-*** arch - x64
-** testing if installed package keeps a record of temporary installation path
-* DONE (utilsag)
-Warning messages:
-1: In i.p(...) : installation of package 'digest' had non-zero exit status
-2: In i.p(...) :
-  installation of package 'stringi' had non-zero exit status
+Skipping install of 'utilsag' from a github remote, the SHA1 (fdc921cd) has not changed since last install.
+  Use `force = TRUE` to force installation
 > path <- "C:/Users/agalecki/Documents/GitHub/utilsag/examples"
 > 
 > library(tidymodels)
@@ -120,13 +39,17 @@ x purrr::discard() masks scales::discard()
 x dplyr::filter()  masks stats::filter()
 x dplyr::lag()     masks stats::lag()
 x recipes::step()  masks stats::step()
-* Learn how to get started at https://www.tidymodels.org/start/
+* Use suppressPackageStartupMessages() to eliminate package startup messages
 > library(utilsag)
 Version: 0.0.5. Built on: 2022-10-18
 > 
 > # Ex1. mytidy for cva object (glmnetUtils)
 > ex1 <- paste0(path,"/ex1-glmnet.R")
-> source(ex1)
+> source(ex1,echo = TRUE)
+
+> rm(list = ls())
+
+> library(glmnet)
 Loading required package: Matrix
 
 Attaching package: 'Matrix'
@@ -136,6 +59,198 @@ The following objects are masked from 'package:tidyr':
     expand, pack, unpack
 
 Loaded glmnet 4.1-4
+
+> x = matrix(rnorm(100 * 20), 100, 20)
+
+> y = rnorm(100)
+
+> fit1 = glmnet(x, y)
+
+> g4 = sample(1:4, 100, replace = TRUE)
+
+> fit3 = glmnet(x, g4, family = "multinomial", alpha = 0.5)
+
+> fit3a = glmnet(x, g4, family = "multinomial", type.multinomial = "grouped")
+
+> set.seed(10101)
+
+> N = 1000
+
+> p = 30
+
+> nzc = p/3
+
+> x_cox = matrix(rnorm(N * p), N, p)
+
+> beta = rnorm(nzc)
+
+> fx = x_cox[, seq(nzc)] %*% beta/3
+
+> hx = exp(fx)
+
+> ty = rexp(N, hx)
+
+> tcens = rbinom(n = N, prob = 0.3, size = 1)
+
+> y_cox = cbind(time = ty, status = 1 - tcens)
+
+> fit_cox = glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
+
+> myglance(fit1)
+# A tibble: 1 x 6
+  nulldev npasses  nobs family   n_lambda alpha
+    <dbl>   <int> <int> <chr>       <int> <dbl>
+1    90.7     281   100 gaussian       66     1
+
+> mytidy(fit1)
+# A tibble: 1,056 x 3
+# Groups:   step [66]
+   term         step estimate
+   <chr>       <dbl>    <dbl>
+ 1 (Intercept)     1 -0.0732 
+ 2 (Intercept)     2 -0.0719 
+ 3 V7              2  0.0191 
+ 4 (Intercept)     3 -0.0701 
+ 5 V7              3  0.0358 
+ 6 V11             3 -0.00594
+ 7 (Intercept)     4 -0.0678 
+ 8 V7              4  0.0496 
+ 9 V8              4 -0.00670
+10 V11             4 -0.0185 
+# ... with 1,046 more rows
+
+> mytidy(fit1, what = "dev")
+# A tibble: 66 x 5
+   alpha  step lambda dev.ratio    df
+   <dbl> <int>  <dbl>     <dbl> <int>
+ 1     1     1 0.193    0           0
+ 2     1     2 0.176    0.00698     1
+ 3     1     3 0.160    0.0147      2
+ 4     1     4 0.146    0.0255      3
+ 5     1     5 0.133    0.0361      3
+ 6     1     6 0.121    0.0449      3
+ 7     1     7 0.111    0.0531      4
+ 8     1     8 0.101    0.0625      4
+ 9     1     9 0.0918   0.0708      5
+10     1    10 0.0836   0.0779      5
+# ... with 56 more rows
+
+> myglance(fit3)
+# A tibble: 1 x 6
+  nulldev npasses  nobs family      n_lambda alpha
+    <dbl>   <int> <int> <chr>          <int> <dbl>
+1    276.    2435   100 multinomial       74   0.5
+
+> mytidy(fit3)
+# A tibble: 4,094 x 4
+# Groups:   step [74]
+   class term   step estimate
+   <chr> <chr> <dbl>    <dbl>
+ 1 1     ""        1   0.0432
+ 2 2     ""        1   0.117 
+ 3 3     ""        1  -0.0368
+ 4 4     ""        1  -0.124 
+ 5 1     ""        2   0.0437
+ 6 2     ""        2   0.118 
+ 7 3     ""        2  -0.0327
+ 8 3     "V15"     2   0.0508
+ 9 4     ""        2  -0.129 
+10 4     "V11"     2   0.0438
+# ... with 4,084 more rows
+
+> mytidy(fit3, what = "dev")
+# A tibble: 74 x 5
+   alpha  step lambda dev.ratio    df
+   <dbl> <int>  <dbl>     <dbl> <int>
+ 1   0.5     1  0.310 -1.61e-16     0
+ 2   0.5     2  0.283  9.01e- 3     2
+ 3   0.5     3  0.258  1.78e- 2     2
+ 4   0.5     4  0.235  2.60e- 2     2
+ 5   0.5     5  0.214  3.36e- 2     2
+ 6   0.5     6  0.195  4.07e- 2     2
+ 7   0.5     7  0.178  5.01e- 2     4
+ 8   0.5     8  0.162  5.98e- 2     5
+ 9   0.5     9  0.147  7.43e- 2     8
+10   0.5    10  0.134  9.11e- 2     9
+# ... with 64 more rows
+
+> myglance(fit3a)
+# A tibble: 1 x 6
+  nulldev npasses  nobs family      n_lambda alpha
+    <dbl>   <int> <int> <chr>          <int> <dbl>
+1    276.    9888   100 multinomial       68     1
+
+> mytidy(fit3a)
+# A tibble: 4,784 x 4
+# Groups:   step [68]
+   class term   step estimate
+   <chr> <chr> <dbl>    <dbl>
+ 1 1     ""        1   0.0432
+ 2 2     ""        1   0.117 
+ 3 3     ""        1  -0.0368
+ 4 4     ""        1  -0.124 
+ 5 1     ""        2   0.0475
+ 6 1     "V11"     2  -0.0353
+ 7 2     ""        2   0.117 
+ 8 2     "V11"     2   0.0113
+ 9 3     ""        2  -0.0325
+10 3     "V11"     2  -0.0355
+# ... with 4,774 more rows
+
+> mytidy(fit3a, what = "dev")
+# A tibble: 68 x 5
+   alpha  step lambda dev.ratio    df
+   <dbl> <int>  <dbl>     <dbl> <int>
+ 1     1     1 0.206  -1.61e-16     0
+ 2     1     2 0.187   1.11e- 2     1
+ 3     1     3 0.171   2.52e- 2     2
+ 4     1     4 0.156   4.01e- 2     2
+ 5     1     5 0.142   5.27e- 2     2
+ 6     1     6 0.129   6.34e- 2     2
+ 7     1     7 0.118   7.75e- 2     5
+ 8     1     8 0.107   9.45e- 2     6
+ 9     1     9 0.0977  1.16e- 1     7
+10     1    10 0.0890  1.38e- 1     9
+# ... with 58 more rows
+
+> myglance(fit_cox)
+# A tibble: 1 x 6
+  nulldev npasses  nobs family n_lambda alpha
+    <dbl>   <int> <int> <chr>     <int> <dbl>
+1   8177.     444  1000 cox          51   0.5
+
+> mytidy(fit_cox)
+# A tibble: 696 x 3
+# Groups:   step [50]
+   term   step estimate
+   <chr> <dbl>    <dbl>
+ 1 V6        2  -0.0247
+ 2 V1        3   0.0222
+ 3 V6        3  -0.0507
+ 4 V9        3   0.0121
+ 5 V1        4   0.0470
+ 6 V6        4  -0.0765
+ 7 V9        4   0.0378
+ 8 V1        5   0.0709
+ 9 V6        5  -0.101 
+10 V9        5   0.0623
+# ... with 686 more rows
+
+> mytidy(fit_cox, what = "dev")
+# A tibble: 51 x 5
+   alpha  step lambda dev.ratio    df
+   <dbl> <int>  <dbl>     <dbl> <int>
+ 1   0.5     1  0.474   0           0
+ 2   0.5     2  0.431   0.00137     1
+ 3   0.5     3  0.393   0.00444     3
+ 4   0.5     4  0.358   0.00805     3
+ 5   0.5     5  0.326   0.0113      3
+ 6   0.5     6  0.297   0.0151      4
+ 7   0.5     7  0.271   0.0185      4
+ 8   0.5     8  0.247   0.0216      4
+ 9   0.5     9  0.225   0.0243      5
+10   0.5    10  0.205   0.0275      6
+# ... with 41 more rows
 > mytidy(fit_cox)
 # A tibble: 696 x 3
 # Groups:   step [50]
@@ -171,4 +286,4 @@ Loaded glmnet 4.1-4
 > 
 > proc.time()
    user  system elapsed 
-   5.39    1.93   27.18 
+   2.48    0.93    3.71 
