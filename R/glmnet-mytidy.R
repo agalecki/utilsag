@@ -46,21 +46,34 @@ return(ret)
 #' 
 #' @method mytidy glmnet
 #' @export
-mytidy.glmnet <- function(x, return_zeros = FALSE, extract = c("mod", "summ"), ...) {
- extract <- match.arg(extract)
+mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
+ ret <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
+   select(-dev.ratio, -lambda) %>% arrange(step) %>%
+   group_by(step)
+ return(ret)
+}
+#-  mytidy_glmnet_coef(fit_cox)
+
+
+mytidy_glmnet_dev <- function(x){
  xcall <- as.list(x$call)
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha = 1
- ret_mod <- tidy(x, return_zeros = return_zeros) %>% 
-         mutate(sx = as.character(step-1), step.label = paste0("s", sx), df.step = x$df[step]) %>% 
-         select(-sx) %>% arrange(step) %>% relocate(step, step.label) %>%
-         group_by(step)
- ret_summ <- ret_mod %>% slice(1) %>% 
-     mutate(alpha = alpha) %>%
-     select(alpha, step, step.label, lambda, dev.ratio, df.step) %>% ungroup()  
- ret <- switch (extract,
-                 mod  = ret_mod %>% select(-dev.ratio, -lambda, -df.step),
-                 summ = ret_summ)
+ len <- length(x$lambda)
+ ret <- as_tibble( list(alpha = alpha, 
+                        step = 1:len,
+                        lambda = x$lambda, 
+                        dev.ratio <- x$dev.ratio,
+                        df = x$df))
+ return(ret)
+}
+#  mytidy_glmnet_dev(fit_cox)
+
+mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"), ...) {
+ component <- match.arg(component)
+ ret <- switch ( component,
+                 coef  = mytidy_glmnet_coef(x, return_zeros =return_zeros, ...),
+                 dev = mytidy_glmnet_dev(x))
  return(ret)
 }
 #mytidy(fit) %>% print(n=50)

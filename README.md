@@ -17,7 +17,7 @@ library("devtools"); install_github("agalecki/utilsag")
 path <- "./examples"
 
 # Ex1. mytidy for cva object (glmnetUtils)
-ex1 <- paste0(path,"/ex1-cva.R")
+ex1 <- paste0(path,"/ex1-glmnet.R")
 source(ex1)
 mytidy(cva)
 mytidy(cva, extract = "mod")
