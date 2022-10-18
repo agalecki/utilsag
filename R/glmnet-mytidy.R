@@ -46,11 +46,23 @@ return(ret)
 #' 
 #' @method mytidy glmnet
 #' @export
-mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
- ret <- tidy(x, return_zeros = return_zeros) %>% 
-         mutate(sx = as.character(step-1), step.lambda = paste0("s", sx)) %>% 
-         select(-sx) %>%
+mytidy.glmnet <- function(x, return_zeros = FALSE, extract = c("mod", "summ"), ...) {
+ extract <- match.arg(extract)
+ xcall <- as.list(x$call)
+ alpha <- xcall$alpha
+ if (is.null(alpha)) alpha = 1
+ ret_mod <- tidy(x, return_zeros = return_zeros) %>% 
+         mutate(sx = as.character(step-1), step.label = paste0("s", sx)) %>% 
+         select(-sx) %>% arrange(step) %>%
          group_by(step)
+ ret_summ <- ret_mod %>% slice(1) %>% 
+     mutate(alpha = alpha) %>%
+     select(alpha, step, step.label, lambda, dev.ratio) %>% ungroup()  
+ ret <- switch (extract,
+                 mod  = ret_mod %>% select(-dev.ratio, -lambda),
+                 summ = ret_summ)
  return(ret)
 }
-# mytidy(fit)
+#mytidy(fit) %>% print(n=50)
+#mytidy(fit, extract = "summ") %>% print(n=50)
+
