@@ -17,7 +17,7 @@ mytidy_glmnet_dev <- function(x){
  ret <- as_tibble( list(alpha = alpha, 
                         step = 1:len,
                         lambda = x$lambda, 
-                        dev.ratio <- x$dev.ratio,
+                        dev.ratio = x$dev.ratio,
                         df = x$df))
  return(ret)
 }

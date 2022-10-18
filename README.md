@@ -8,6 +8,10 @@ Utility functions for internal use
 ```
 detach(package:utilsag)
 library("devtools"); install_github("agalecki/utilsag")
+library(utilssag)
+methods(myglance)
+methods(mytidy)
+
 ```
 
 ## Examples
@@ -19,6 +23,7 @@ path <- "./examples"
 # Ex1. mytidy for cva object (glmnetUtils)
 ex1 <- paste0(path,"/ex1-glmnet.R")
 source(ex1)
+mytidy(fit_cox, component = "dev")
 mytidy(fit_cox)
 
 ## syntax
