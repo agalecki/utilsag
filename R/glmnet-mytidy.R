@@ -52,14 +52,14 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, extract = c("mod", "summ"), .
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha = 1
  ret_mod <- tidy(x, return_zeros = return_zeros) %>% 
-         mutate(sx = as.character(step-1), step.label = paste0("s", sx)) %>% 
-         select(-sx) %>% arrange(step) %>%
+         mutate(sx = as.character(step-1), step.label = paste0("s", sx), df.step = x$df[step]) %>% 
+         select(-sx) %>% arrange(step) %>% relocate(step, step.label) %>%
          group_by(step)
  ret_summ <- ret_mod %>% slice(1) %>% 
      mutate(alpha = alpha) %>%
-     select(alpha, step, step.label, lambda, dev.ratio) %>% ungroup()  
+     select(alpha, step, step.label, lambda, dev.ratio, df.step) %>% ungroup()  
  ret <- switch (extract,
-                 mod  = ret_mod %>% select(-dev.ratio, -lambda),
+                 mod  = ret_mod %>% select(-dev.ratio, -lambda, -df.step),
                  summ = ret_summ)
  return(ret)
 }
