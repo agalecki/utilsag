@@ -1,3 +1,29 @@
+# Not exported funcs
+
+mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
+ ret <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
+   select(-dev.ratio, -lambda) %>% arrange(step) %>%
+   group_by(step)
+ return(ret)
+}
+#-  mytidy_glmnet_coef(fit_cox)
+
+
+mytidy_glmnet_dev <- function(x){
+ xcall <- as.list(x$call)
+ alpha <- xcall$alpha
+ if (is.null(alpha)) alpha = 1
+ len <- length(x$lambda)
+ ret <- as_tibble( list(alpha = alpha, 
+                        step = 1:len,
+                        lambda = x$lambda, 
+                        dev.ratio <- x$dev.ratio,
+                        df = x$df))
+ return(ret)
+}
+#  mytidy_glmnet_dev(fit_cox)
+
+
 #' 
 #' @method myglance glmnet
 #' @export
@@ -46,28 +72,6 @@ return(ret)
 #' 
 #' @method mytidy glmnet
 #' @export
-mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
- ret <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
-   select(-dev.ratio, -lambda) %>% arrange(step) %>%
-   group_by(step)
- return(ret)
-}
-#-  mytidy_glmnet_coef(fit_cox)
-
-
-mytidy_glmnet_dev <- function(x){
- xcall <- as.list(x$call)
- alpha <- xcall$alpha
- if (is.null(alpha)) alpha = 1
- len <- length(x$lambda)
- ret <- as_tibble( list(alpha = alpha, 
-                        step = 1:len,
-                        lambda = x$lambda, 
-                        dev.ratio <- x$dev.ratio,
-                        df = x$df))
- return(ret)
-}
-#  mytidy_glmnet_dev(fit_cox)
 
 mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"), ...) {
  component <- match.arg(component)
