@@ -14,11 +14,13 @@ mytidy_glmnet_dev <- function(x){
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha = 1
  len <- length(x$lambda)
- ret <- as_tibble( list(alpha = alpha, 
+ ret <- tibble( list(alpha = alpha, 
                         step = 1:len,
                         lambda = x$lambda, 
                         dev.ratio = x$dev.ratio,
-                        df = x$df))
+                        df = x$df
+                     )
+              )
  return(ret)
 }
 #  mytidy_glmnet_dev(fit_cox)
@@ -77,7 +79,8 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"),
  component <- match.arg(component)
  ret <- switch ( component,
                  coef  = mytidy_glmnet_coef(x, return_zeros =return_zeros, ...),
-                 dev = mytidy_glmnet_dev(x))
+                 dev = mytidy_glmnet_dev(x)
+                 )
  return(ret)
 }
 #mytidy(fit) %>% print(n=50)
