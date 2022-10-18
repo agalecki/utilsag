@@ -14,11 +14,11 @@ mytidy_glmnet_dev <- function(x){
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha = 1
  len <- length(x$lambda)
- ret <- tibble( list(alpha = alpha, 
-                        step = 1:len,
-                        lambda = x$lambda, 
-                        dev.ratio = x$dev.ratio,
-                        df = x$df
+ ret <- broom::as_tidy_tibble( list(alpha = alpha, 
+                     step = 1:len,
+                     lambda = x$lambda, 
+                     dev.ratio = x$dev.ratio,
+                     df = x$df
                      )
               )
  return(ret)
@@ -75,11 +75,11 @@ return(ret)
 #' @method mytidy glmnet
 #' @export
 
-mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"), ...) {
- component <- match.arg(component)
- ret <- switch ( component,
-                 coef  = mytidy_glmnet_coef(x, return_zeros =return_zeros, ...),
-                 dev = mytidy_glmnet_dev(x)
+mytidy.glmnet <- function(x, return_zeros = FALSE, what = c("coef", "dev"), ...) {
+ what <- match.arg(what)
+ ret <- switch ( what,
+                 coef  = mytidy_glmnet_coef(x, return_zeros = return_zeros, ...),
+                 dev =  mytidy_glmnet_dev(x)
                  )
  return(ret)
 }

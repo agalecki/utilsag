@@ -8,7 +8,8 @@ Utility functions for internal use
 ```
 detach(package:utilsag)
 library("devtools"); install_github("agalecki/utilsag")
-library(utilssag)
+
+library(utilsag)
 methods(myglance)
 methods(mytidy)
 
