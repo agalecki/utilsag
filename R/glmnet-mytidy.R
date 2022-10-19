@@ -55,7 +55,7 @@ mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
  ret <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
    select(-dev.ratio, -lambda) %>% arrange(step) %>%
    group_by(step) %>% relocate(step)
-   if (inherits(x, "multnet")) retgroup_by(step, class) 
+   if (inherits(x, "multnet")) ret <- group_by(step, class) 
 
  return(ret)
 }
