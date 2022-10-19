@@ -103,6 +103,6 @@ mytidy.cv.glmnet <- function(x, ...) {
 #' @family glmnet tidiers
 myglance.cv.glmnet <- function(x, ...) {
   ret <- glance(x, ...)
-  ret <- ret %>% mutate(alpha= call_alpha)
-  retuurn(ret)
+  ret <- ret %>% mutate(alpha= call_alpha(x))
+  return(ret)
  }
