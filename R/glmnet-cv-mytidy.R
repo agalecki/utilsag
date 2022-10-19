@@ -8,9 +8,9 @@
 #'   "lambda",
 #'   "std.error",
 #'   "nzero",
-#'   conf.low = "lower bound on confidence interval for cross-validation
+#'   conf.low = "Lower bound on confidence interval for cross-validation
 #'     estimated loss.",
-#'   conf.high = "upper bound on confidence interval for cross-validation
+#'   conf.high = "Upper bound on confidence interval for cross-validation
 #'     estimated loss.",
 #'   estimate = "Median loss across all cross-validation folds for a given
 #'     lamdba"
@@ -101,6 +101,6 @@ mytidy.cv.glmnet <- function(x, ...) {
 myglance.cv.glmnet <- function(x, ...) {
   a <- call_alpha(x)
   ret0 <- glance(x, ...)
-  ret <- ret0 %>% mutate(alpha=a)
+  ret <- ret0 %>% mutate(alpha=a, family = family(x)) %>% relocate(alpha)
   return(ret)
  }

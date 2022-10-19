@@ -17,9 +17,9 @@ myglance(glmnet_fit_cox)
 mytidy(glmnet_fit_cox)
 mytidy(glmnet_fit_cox, component = "dev")
 
-glance(cvglmnet_fit_cox)
+myglance(cvglmnet_fit_cox)
 tidy(cvglmnet_fit_cox)
-mytidy(cvglmnet_fit_cox)
+mytidy(cvglmnet_fit_cox) %>% print(n=60)
 
 str(cvglmnet_fit_cox)
 
