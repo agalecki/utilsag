@@ -2,9 +2,9 @@
 #' -@ template title_desc_tidy
 #'- 
 #' @param x A `cv.glmnet` object returned from [glmnet::cv.glmnet()].
-#' @template param_unused_dots
+#' - @ template param_unused_dots
 #'
-#' @evalRd return_tidy(
+#' @evalRd broom:::return_tidy(
 #'   "lambda",
 #'   "std.error",
 #'   "nzero",
@@ -71,7 +71,8 @@
 #'   geom_line() +
 #'   geom_vline(xintercept = glance_cv$lambda.min) +
 #'   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
-#'   
+#' 
+#' #' @method mytidy cv.glmnet
 #' @export
 #' @family glmnet tidiers
 #' @seealso [tidy()], [glmnet::cv.glmnet()]
@@ -94,8 +95,9 @@ mytidy.cv.glmnet <- function(x, ...) {
 #'
 #' - @inherit tidy.cv.glmnet params examples
 #'
-#' @evalRd return_glance("lambda.min", "lambda.1se", "nobs")
+#' @evalRd broom:::return_glance("lambda.min", "lambda.1se", "nobs")
 #'
+#' @method myglance cv.glmnet
 #' @export
 #' @seealso [glance()], [glmnet::cv.glmnet()]
 #' @family glmnet tidiers
