@@ -92,7 +92,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 #'
 #' - @inherit tidy.cv.glmnet params examples
 #'
-#' @evalRd broom:::return_glance("lambda.min", "lambda.1se", "nobs")
+#' @evalRd broom:::return_glance("alpha", "lambda.min", "lambda.1se", "nobs", "family")
 #'
 #' @method myglance cv.glmnet
 #' @export
@@ -101,6 +101,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 myglance.cv.glmnet <- function(x, ...) {
   a <- call_alpha(x)
   ret0 <- glance(x, ...)
-  ret <- ret0 %>% mutate(alpha=a, family = family(x)) %>% relocate(alpha)
+  ret <- ret0 %>% mutate(alpha=a, family = family(x),
+     index_min = x$index[1], index_1se = x$index[2]) %>% relocate(alpha)
   return(ret)
  }
