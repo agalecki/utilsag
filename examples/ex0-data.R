@@ -24,4 +24,4 @@ ty = rexp(N, hx)
 tcens = rbinom(n = N, prob = 0.3, size = 1)  # censoring indicator
 y_cox = cbind(time = ty, status = 1 - tcens)  # y=Surv(ty,1-tcens) with library(survival)
 glmnet_fit_cox = glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
-glmnecv_fit_cox = glmnet.cv(x_cox, y_cox, family = "cox", alpha = 0.5)
+cvglmnet_fit_cox = cv.glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
