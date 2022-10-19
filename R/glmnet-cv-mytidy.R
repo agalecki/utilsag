@@ -102,7 +102,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 #' @seealso [glance()], [glmnet::cv.glmnet()]
 #' @family glmnet tidiers
 myglance.cv.glmnet <- function(x, ...) {
-  as_glance_tibble(
+  broom::as_glance_tibble(
     lambda.min = x$lambda.min,
     lambda.1se = x$lambda.1se,
     nobs = stats::nobs(x),
