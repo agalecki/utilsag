@@ -48,7 +48,7 @@ return(ret)
 #' @method mytidy glmnet
 #' @export
 
-mytidy.glmnet <- function(x, return_zeros = FALSE, what = c("coef", "dev"), ...) {
+mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"), ...) {
 
 # Auxiliary functions
 mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
@@ -79,8 +79,8 @@ mytidy_glmnet_dev <- function(x){
 #  mytidy_glmnet_dev(fit_cox)
 
 
- what <- match.arg(what)
- ret <- switch ( what,
+ component <- match.arg(component)
+ ret <- switch ( component,
                  coef  = mytidy_glmnet_coef(x, return_zeros = return_zeros, ...),
                  dev =  mytidy_glmnet_dev(x)
                  )

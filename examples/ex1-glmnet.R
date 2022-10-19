@@ -11,6 +11,9 @@ myglance(glmnet_fit3a)
 mytidy(glmnet_fit3a)
 mytidy(glmnet_fit3a, what = "dev")
 
+tidy(glmnet_fit3a)
+tidy(glmnet_fit3a)
+
 myglance(glmnet_fit_cox)
 mytidy(glmnet_fit_cox)
 mytidy(glmnet_fit_cox, what = "dev")
