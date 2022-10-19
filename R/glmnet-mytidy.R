@@ -1,17 +1,19 @@
 # Not exported funcs
 
+call_alpha <- function (x){
+ xcall <- as.list(x$call)
+ alpha <- xcall$alpha
+ if (is.null(alpha)) alpha=1
+return(alpha)
+]
 
 #' 
 #' @method myglance glmnet
 #' @export
 myglance.glmnet <- function(x){
- xcall <- as.list(x$call)
- alpha <- xcall$alpha
- if (is.null(alpha)) alpha=1
- fam   <-  family(x)
  ret0 <- glance(x)
  ret <- ret0 %>% 
-    mutate(family = family(x), n_lambda = length(x$lambda), alpha = alpha)
+    mutate(family = family(x), n_lambda = length(x$lambda), alpha = call_alpha(x))
 return(ret)
 }
 
@@ -72,10 +74,7 @@ mytidy_glmnet_dev <- function(x){
  return(ret)
 }
 
-#  mytidy_glmnet_dev(fit_cox)
- xcall <- as.list(x$call)
- alpha <- xcall$alpha
- if (is.null(alpha)) alpha = 1
+ alpha <- call_alpha(x)
 
  component <- match.arg(component)
  ret <- switch ( component,
