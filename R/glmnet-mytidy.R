@@ -5,7 +5,8 @@ call_alpha <- function (x){
  alpha <- xcall$alpha
  if (is.null(alpha)) alpha=1
 return(alpha)
-]
+}
+
 
 #' 
 #' @method myglance glmnet
