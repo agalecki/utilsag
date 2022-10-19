@@ -17,9 +17,11 @@ myglance(glmnet_fit_cox)
 mytidy(glmnet_fit_cox)
 mytidy(glmnet_fit_cox, component = "dev")
 
-myglance(cvglmnet_fit_cox)
-mytidy(cvglmnet_fit_cox)
+glance(cvglmnet_fit_cox)
 tidy(cvglmnet_fit_cox)
+mytidy(cvglmnet_fit_cox)
+
+str(cvglmnet_fit_cox)
 
 save(glmnet_fit3a, file="ex1-glmnet.Rdata")
 

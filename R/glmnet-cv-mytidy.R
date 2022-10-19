@@ -66,11 +66,6 @@
 #' # coefficient plot with min lambda shown
 #' tidied <- tidy(cvfit1$glmnet.fit)
 #'
-#' ggplot(tidied, aes(lambda, estimate, group = term)) +
-#'   scale_x_log10() +
-#'   geom_line() +
-#'   geom_vline(xintercept = glance_cv$lambda.min) +
-#'   geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
 #' 
 #' #' @method mytidy cv.glmnet
 #' @export
@@ -80,6 +75,8 @@ mytidy.cv.glmnet <- function(x, ...) {
   with(
     x,
     tibble(
+      alpha  = call_alpha(x),
+      step   = 1:length(lambda),
       lambda = lambda,
       estimate = cvm,
       std.error = cvsd,
@@ -102,7 +99,8 @@ mytidy.cv.glmnet <- function(x, ...) {
 #' @seealso [glance()], [glmnet::cv.glmnet()]
 #' @family glmnet tidiers
 myglance.cv.glmnet <- function(x, ...) {
-  ret <- glance(x, ...)
-  ret <- ret %>% mutate(alpha= call_alpha(x))
+  a <- call_alpha(x0
+  ret0 <- glance(x, ...)
+  ret <- ret0 %>% mutate(alpha=a)
   return(ret)
  }
