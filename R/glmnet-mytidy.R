@@ -53,19 +53,15 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"),
 # Auxiliary functions
 mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
  ret <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
-   select(-dev.ratio, -lambda) %>% arrange(step) %>%
-   group_by(step) %>% relocate(step)
+   select(-dev.ratio, -lambda) %>% arrange(step) %>% mutate
+   group_by(step) %>% relocate(step) %>% mutate(alpha=alpha)
    if (inherits(x, "multnet")) ret <- ret %>% group_by(step, class) 
 
  return(ret)
 }
-#-  mytidy_glmnet_coef(fit_cox)
 
 
 mytidy_glmnet_dev <- function(x){
- xcall <- as.list(x$call)
- alpha <- xcall$alpha
- if (is.null(alpha)) alpha = 1
  len <- length(x$lambda)
  ret <- tibble( alpha = alpha, 
                 step = 1:len,
@@ -77,7 +73,9 @@ mytidy_glmnet_dev <- function(x){
 }
 
 #  mytidy_glmnet_dev(fit_cox)
-
+ xcall <- as.list(x$call)
+ alpha <- xcall$alpha
+ if (is.null(alpha)) alpha = 1
 
  component <- match.arg(component)
  ret <- switch ( component,
@@ -86,6 +84,4 @@ mytidy_glmnet_dev <- function(x){
                  )
  return(ret)
 }
-#mytidy(fit) %>% print(n=50)
-#mytidy(fit, extract = "summ") %>% print(n=50)
 
