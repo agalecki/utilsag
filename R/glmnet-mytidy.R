@@ -79,7 +79,7 @@ mytidy_glmnet_dev <- function(x){
  alpha <- call_alpha(x)
  coefs  <- mytidy_glmnet_coef(x, return_zeros = return_zeros, ...),
  dev   <-  mytidy_glmnet_dev(x)
- ret   <- full_join(dev, coefs, by = "step") %>% nest(coefs = c(term, estimate))
+ ret   <- left_join(dev, coefs, by = "step") %>% nest(coefs = c(term, estimate))
  return(ret)
 }
 
