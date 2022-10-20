@@ -64,7 +64,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
    ret     <- xjoin %>%  nest(beta = c(term, estimate))
    if (inherits(x, "multnet")){
      # https://stackoverflow.com/questions/39228502/double-nesting-in-the-tidyverse
-     ret1 <- xjoin  %>% nest(class = c(class), .key = by_class)
+     ret1 <- xjoin  %>% group_by(class) %>% nest(.key = by_class)
      ret  <- ret1    %>% mutate(by_class = map(by_class, ~.x %>% 
                                group_by(class) %>%  nest(by_class)))
    } 
