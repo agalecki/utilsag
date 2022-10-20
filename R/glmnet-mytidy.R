@@ -51,14 +51,15 @@ return(ret)
 #' @method mytidy glmnet
 #' @export
 
-mytidy.glmnet <- function(x, return_zeros = FALSE, component = c("coef", "dev"), ...) {
+mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
 
 # Auxiliary functions
 mytidy_glmnet_coef <- function(x, return_zeros = FALSE, ...){
  ret <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
-   select(-dev.ratio, -lambda) %>% arrange(step) %>% mutate(alpha=alpha)%>%
-   group_by(step) %>% relocate(step) 
-   if (inherits(x, "multnet")) ret <- ret %>% group_by(step, class) 
+   select(-dev.ratio, -lambda) %>% arrange(step) %>% mutate(alpha=alpha)
+   # group_by(step)  %>% 
+   # relocate(step) 
+   ##if (inherits(x, "multnet")) ret <- ret %>% group_by(step, class) ???
 
  return(ret)
 }
@@ -76,12 +77,9 @@ mytidy_glmnet_dev <- function(x){
 }
 
  alpha <- call_alpha(x)
-
- component <- match.arg(component)
- ret <- switch ( component,
-                 coef  = mytidy_glmnet_coef(x, return_zeros = return_zeros, ...),
-                 dev =  mytidy_glmnet_dev(x)
-                 )
+ coefs  <- mytidy_glmnet_coef(x, return_zeros = return_zeros, ...),
+ dev   <-  mytidy_glmnet_dev(x)
+ ret   <- full_join(dev, coefs, by = "step") %>% nest(coefs = c(term, estimate))
  return(ret)
 }
 
