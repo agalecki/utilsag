@@ -69,7 +69,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
      ret  <- ret1    %>% mutate(by_class = map(model_info, function(df) df %>%  
                                group_by(class) %>%  nest()))
    }
-   retx <- join_left(dev, ret, by = "step") 
+   retx <- left_join(dev, ret, by = "step") 
  return(retx)
 }
 
