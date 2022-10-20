@@ -53,7 +53,7 @@ return(ret)
 
 mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
  step <- 1:length(x$lambda)
- # step_df <- tibble(step = step)
+ step_df <- tibble(step = step)
  dev <- tibble( alpha = call_alpha(x), 
                 step = step,
                 lambda = x$lambda, 
@@ -61,14 +61,15 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
                 df = x$df
               )
    coefs  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
-   select(-dev.ratio, -lambda)
-   xjoin   <- left_join(dev, coefs, by = "step") 
-   ret     <- xjoin %>%  group_by(lambda, dev.ratio) %>% nest(coefs = c(term, estimate))
+       select(-dev.ratio, -lambda)
+   xjoin   <- left_join(step_df, coefs, by = "step") 
+   ret     <- xjoin %>%  group_by(lambda) %>% nest(coefs = c(term, estimate))
    if (inherits(x, "multnet")){
      ret1 <- xjoin  %>% group_by(step) %>% nest() %>% rename(model_info = data)
      ret  <- ret1    %>% mutate(by_class = map(model_info, function(df) df %>%  
                                group_by(class) %>%  nest()))
    }
- return(ret)
+   retx <- join_left(dev, ret1, by = "step") 
+ return(retx)
 }
 
