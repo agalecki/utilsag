@@ -60,9 +60,9 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
               )
  coefs  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
    select(-dev.ratio, -lambda)
-   ret   <- left_join(dev, coefs, by = "step")
-     ret <- ret %>% nest(beta = c(term, estimate))
-    if (inherits(x, "multnet")) ret <- ret %>% nest(class = c(class))
+   ret1   <- left_join(dev, coefs, by = "step")
+     ret <- ret1 %>% nest(beta = c(term, estimate))
+    if (inherits(x, "multnet")) ret <- ret1 %>% nest(class = c(class)) %>% nest(beta = (term, estimate))
  return(ret)
 }
 
