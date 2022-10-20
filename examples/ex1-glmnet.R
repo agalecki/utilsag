@@ -2,13 +2,15 @@
 myglance(glmnet_fit1)  # coef by default
 mytidy(glmnet_fit1)
 
+tidy(glmnet_fit3) %>% arrange(step, class) %>% print (n=1000)
+tidy(glmnet_fit3a)
+
 myglance(glmnet_fit3)
 mytidy(glmnet_fit3)
 
 myglance(glmnet_fit3a)
 mytidy(glmnet_fit3a)
 
-tidy(glmnet_fit3a)
 
 myglance(glmnet_fit_cox)
 mytidy(glmnet_fit_cox)
