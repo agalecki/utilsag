@@ -58,11 +58,16 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
                 dev.ratio = x$dev.ratio,
                 df = x$df
               )
- coefs  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
+   beta  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
    select(-dev.ratio, -lambda)
-   ret1   <- left_join(dev, coefs, by = "step")
-     ret <- ret1 %>% nest(beta = c(term, estimate))
-    if (inherits(x, "multnet")) ret <- ret1  %>% nest(beta = c(term, estimate)) %>% nest(class = c(class))
+   xjoin   <- left_join(dev, beta, by = "step") 
+   ret     <- xjoin %>%  nest(beta = c(term, estimate))
+   if (inherits(x, "multnet")){
+     # https://stackoverflow.com/questions/39228502/double-nesting-in-the-tidyverse
+     ret1 <- xjoin  %>% nest(class = c(class), .key = by_class)
+     ret  <- ret1    %>% mutate(by_class = map(by_class, ~.x %>% 
+                               group_by(class) %>%  nest(by_class)))
+   } 
  return(ret)
 }
 
