@@ -52,22 +52,23 @@ return(ret)
 #' @export
 
 mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
+ step <- 1:length(x$lambda)
+ # step_df <- tibble(step = step)
  dev <- tibble( alpha = call_alpha(x), 
-                step = 1:length(x$lambda),
+                step = step,
                 lambda = x$lambda, 
                 dev.ratio = x$dev.ratio,
                 df = x$df
               )
-   beta  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
+   coefs  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
    select(-dev.ratio, -lambda)
-   xjoin   <- left_join(dev, beta, by = "step") 
-   ret     <- xjoin %>%  group_by(lambda) %>% nest(beta = c(term, estimate))
+   xjoin   <- left_join(dev, coefs, by = "step") 
+   ret     <- xjoin %>%  group_by(lambda, dev.ratio) %>% nest(coefs = c(term, estimate))
    if (inherits(x, "multnet")){
-     # https://stackoverflow.com/questions/39228502/double-nesting-in-the-tidyverse
-     ret1 <- xjoin  %>% group_by(step) %>% nest() %>% rename(model = data)
+     ret1 <- xjoin  %>% group_by(step) %>% nest() %>% rename(model_info = data)
      ret  <- ret1    %>% mutate(by_class = map(model, function(df) df %>%  
                                group_by(class) %>%  nest()))
-   } 
+   }
  return(ret)
 }
 
