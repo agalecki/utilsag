@@ -62,7 +62,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
    select(-dev.ratio, -lambda)
    ret1   <- left_join(dev, coefs, by = "step")
      ret <- ret1 %>% nest(beta = c(term, estimate))
-    if (inherits(x, "multnet")) ret <- ret1 %>% nest(class = c(class)) %>% nest(beta = (term, estimate))
+    if (inherits(x, "multnet")) ret <- ret1 %>% nest(class = c(class)) %>% nest(beta = c(term, estimate))
  return(ret)
 }
 
