@@ -70,11 +70,6 @@ ggplot(tidied_cv, aes(lambda, nzero)) +
 # coefficient plot with min lambda shown
 tidied <- tidy(cvfit1$glmnet.fit)
 
-ggplot(tidied, aes(lambda, estimate, group = term)) +
-  scale_x_log10() +
-  geom_line() +
-  geom_vline(xintercept = glance_cv$lambda.min) +
-  geom_vline(xintercept = glance_cv$lambda.1se, lty = 2)
 
 #' @method mytidy cv.glmnet
 \dontshow{\}) # examplesIf}
@@ -91,9 +86,9 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{lambda}{Value of penalty parameter lambda.}
   \item{nzero}{Number of non-zero coefficients for the given lambda.}
   \item{std.error}{The standard error of the regression term.}
-  \item{conf.low}{lower bound on confidence interval for cross-validation
+  \item{conf.low}{Lower bound on confidence interval for cross-validation
     estimated loss.}
-  \item{conf.high}{upper bound on confidence interval for cross-validation
+  \item{conf.high}{Upper bound on confidence interval for cross-validation
     estimated loss.}
   \item{estimate}{Median loss across all cross-validation folds for a given
     lamdba}
