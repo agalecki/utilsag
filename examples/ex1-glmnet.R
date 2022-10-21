@@ -1,15 +1,27 @@
 
 myglance(glmnet_fit1)  # coef by default
-mytidy(glmnet_fit1)
+sel <- c(2,10)
+tidy(glmnet_fit1) %>% filter(step %in% sel)
+tidy(glmnet_fit1) %>% filter(step %in% sel) %>% arrange(step)
+mytidy(glmnet_fit1) %>% filter(step %in% sel)
+mytidy(glmnet_fit1) %>% filter(step %in% sel) %>% unnest(coefs)
 
-tidy(glmnet_fit3) %>% arrange(step, class) %>% print (n=1000)
-tidy(glmnet_fit3a)
 
 myglance(glmnet_fit3)
-mytidy(glmnet_fit3)
+sel <- 10
+tidy(glmnet_fit3) %>% filter(step == sel) %>% arrange(step)
+mytidy(glmnet_fit3) %>% filter(step == sel)
+mytidy(glmnet_fit3) %>% filter(step == sel) %>% 
+  unnest(model_info)
+mytidy(glmnet_fit3) %>% filter(step == sel) %>% 
+  unnest(model_info) %>% ungroup()
+
 
 myglance(glmnet_fit3a)
+tidy(glmnet_fit3a) %>% arrange(step)
+tidy(glmnet_fit3a) %>% arrange(step) %>% filter(step == 3)
 mytidy(glmnet_fit3a)
+mytidy(glmnet_fit3a) %>% filter(step == 3) 
 
 
 myglance(glmnet_fit_cox)
