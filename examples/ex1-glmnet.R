@@ -9,7 +9,7 @@ mytidy(glmnet_fit1) %>% filter(step %in% sel) %>% unnest(coefs)
 
 myglance(glmnet_fit3)
 sel <- 10
-tidy(glmnet_fit3) %>% filter(step == sel) %>% arrange(step)
+tidy(glmnet_fit3) %>% filter(step == sel) %>% arrange(step, class)
 mytidy(glmnet_fit3) %>% filter(step == sel)
 mytidy(glmnet_fit3) %>% filter(step == sel) %>% 
   unnest(model_info)
