@@ -27,3 +27,12 @@ glmnet_fit_cox = glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
 cvglmnet_fit_cox = cv.glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
 
 newx_cox <- x_cox[1:10, ]
+
+library(penAFT)
+X <- x_cox
+logY <- log(ty) 
+delta <-  1 - tcens
+#penAFT.en <- penAFT(X = X, logY = logY, delta = delta,
+#                   nlambda = 50, lambda.ratio.min = 0.01,
+#                   penalty = "EN",
+#                   alpha = 1)

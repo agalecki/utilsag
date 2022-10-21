@@ -1,0 +1,64 @@
+#' 
+#' @method myglance penAFT
+#' @export
+myglance.penAFT <- function(x){
+   with(x, 
+        tibble::tibble(
+         alpha    = alpha,
+         n_lambda = length(lambda)
+       ))
+}
+        
+
+#' -@templateVar class penAFT
+#'
+#' -@template title_desc_tidy
+#'
+#' @param x A `penAFT` object returned from [penAFT::penAFT()].
+#' @param `return_zeros` Logical indicating whether coefficients with value zero
+#'   zero should be included in the results. Defaults to `FALSE`.
+#' - @template param_unused_dots
+#'
+#' @evalRd broom:::return_tidy(
+#'   "step",
+#'   "estimate",
+#'   "lambda",
+#'   "dev.ratio",
+#'   df.step  = "The number of nonzero coefficients for each value of lambda. For multnet, the number
+#'      of variables with a nonzero coefficient for any class."
+#' )
+#'
+#' @details Note that while this representation of GLMs is much easier
+#'   to plot and combine than the default structure, it is also much
+#'   more memory-intensive. Do not use for large, sparse matrices.
+#'
+#'   No `augment` method is yet provided even though the model produces
+#'   predictions, because the input data is not tidy (it is a matrix that
+#'   may be very wide) and therefore combining predictions with it is not
+#'   logical. Furthermore, predictions make sense only with a specific
+#'   choice of lambda.
+#' 
+#' @method mytidy penAFT
+#' @export
+
+mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
+ step <- 1L:length(x$lambda)
+ step_df <- tibble(step = step)
+ dev <- tibble( alpha = x$alpha, 
+                step = step,
+                lambda = x$lambda, 
+               )
+   beta <- penAFT.coef(x, lambda= x$lambda)
+     beta_d2 <- bind_cols(beta_d, term = paste0("X", 1:length(x$X.mean)))
+   beta_d <- as_tibble(beta$beta)
+   colnames(beta_d) <- 1:ncol(beta_d)
+    coefs <- pivot_longer(beta_d2, cols = c(dplyr::everything(), 
+               -term), names_to = "step", values_to = "estimate") %>%
+                mutate(step = as.integer(step))
+   if (!return_zeros)  coefs <- filter(coefs, estimate != 0)
+   grpd   <- left_join(step_df, coefs, by = "step") %>%  group_by(step) 
+   ret <-  grpd %>% nest(coefs = c(term, estimate))
+   retx <- left_join(dev, ret, by = "step") 
+ return(retx)
+}
+
