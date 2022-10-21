@@ -1,4 +1,4 @@
-
+set.seed(1234)
 library(glmnet)
 # Gaussian
 x = matrix(rnorm(100 * 20), 100, 20)

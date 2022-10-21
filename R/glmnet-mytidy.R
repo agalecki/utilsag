@@ -65,7 +65,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
        grpd   <- left_join(step_df, coefs, by = "step") %>%  group_by(step) 
        ret <-  grpd %>% nest(coefs = c(term, estimate))
    if (inherits(x, "multnet")){
-       ret <- grpd %>%  group_by(class)%>% 
+       ret <- grpd %>%  arrange(class) %>% 
                  nest(coefs = c(term, estimate))
    }
    retx <- left_join(dev, ret, by = "step") 
