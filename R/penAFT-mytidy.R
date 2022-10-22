@@ -49,11 +49,11 @@ mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
                 lambda = x$lambda, 
                )
    beta1 <- penAFT.coef(x, lambda= x$lambda)
-   beta  <- beta$beta
-   colnames(beta) <- step
-   beta_df <- as_tibble(beta)
+   betax  <- beta$beta
+   colnames(betax) <- step
+   beta_df <- as_tibble(betax)
    beta_df2 <- bind_cols(term = paste0("X", 1:length(x$X.mean)), beta_df)
-    coefs <- pivot_longer(beta_df2, cols = c(dplyr::everything(), 
+   coefs  <- pivot_longer(beta_df2, cols = c(dplyr::everything(), 
                -term), names_to = "step", values_to = "estimate") %>%
                 mutate(step = as.integer(step))
    if (!return_zeros)  coefs <- filter(coefs, estimate != 0)
