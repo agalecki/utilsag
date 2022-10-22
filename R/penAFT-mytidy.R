@@ -68,9 +68,9 @@ mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
 myglance.penAFT <- function(x){
  ret1 <- with(x, 
         tibble::tibble(
-         alpha    = fullfit$alpha,
-         n_lambda = length(fullfit$lambda),
-         ncolx    = length(full.fit$X.mean),
+         alpha    = alpha,
+         n_lambda = length(lambda),
+         ncolx    = length(X.mean),
          lambda_min = lambda.min
        ))
 }
