@@ -70,8 +70,7 @@ myglance.penAFT <- function(x){
         tibble::tibble(
          alpha    = alpha,
          n_lambda = length(lambda),
-         ncolx    = length(X.mean),
-         lambda_min = lambda.min
+         ncolx    = length(X.mean)
        ))
 }
 

@@ -8,6 +8,7 @@ library(utilsag)
 ls()
 
 str(penAFT_object)
+str(penAFTcv_object)
 
 ### penAFT
 stepx <- c(4,5)
@@ -15,7 +16,6 @@ myglance(penAFT_object)
 (tt <- mytidy(penAFT_object) %>% filter(step %in% stepx))
 tt %>% unnest(beta)
 
-str(penAFTcv_object)
 
 
 
