@@ -36,15 +36,15 @@ logY <- log(ty)
 delta <-  1 - tcens    # := status
 
 
-penAFT_object <- penAFT(X = X, logY = logY, delta = delta,
-                   nlambda = 50, lambda.ratio.min = 0.01,
-                   penalty = "EN",
-                   alpha = 0.5)
+#penAFT_object <- penAFT(X = X, logY = logY, delta = delta,
+#                   nlambda = 50, lambda.ratio.min = 0.01,
+#                   penalty = "EN",
+#                   alpha = 0.5)
 
-penAFTcv_object <- penAFT.cv(X = X, logY = logY, delta = delta,
-                   nlambda = 20, lambda.ratio.min = 0.1,
-                   penalty = "EN", nfolds = 5,
-                   alpha = 0.5)
+#penAFTcv_object <- penAFT.cv(X = X, logY = logY, delta = delta,
+#                   nlambda = 20, lambda.ratio.min = 0.1,
+#                   penalty = "EN", nfolds = 5,
+#                   alpha = 0.5)
                    
-save(penAFT_object, penAFTcv_object, file = paste0(path, "/examples/penAFT_objects.Rdata"))
+#save(penAFT_object, penAFTcv_object, file = paste0(path, "/examples/penAFT_objects.Rdata"))
 
