@@ -7,8 +7,10 @@ library(tidymodels)
 library(utilsag)
 ls()
 
-myglance(penAFT_object)
-mytidy(penAFT_object)
 
+stepx <- c(4,5)
+myglance(penAFT_object)
+(tt <- mytidy(penAFT_object) %>% filter( step %in% stepx))
+tt %>% unnest(beta)
 
 
