@@ -13,9 +13,14 @@ return(alpha)
 #' @export
 myglance.glmnet <- function(x){
  ret0 <- glance(x)
- ret <- ret0 %>% 
-    mutate(family = family(x), n_lambda = length(x$lambda), alpha = call_alpha(x))
-return(ret)
+ ret1 <- with(x, 
+          tibble::tibble(
+            family   = family(x), 
+            n_lambda = length(lambda),
+            alpha    = call_alpha(x),
+            n_colx   = dim[1]
+           ))
+return(bind_cols(ret0,ret1))
 }
 
 #' -@templateVar class glmnet

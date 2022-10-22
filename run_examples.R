@@ -13,7 +13,7 @@ source(ex0_data)
 
 # Ex1. mytidy for glmnet object
 ex1 <- paste0(path,"/examples/ex1-glmnet.R")
-#source(ex1,echo = TRUE)
+source(ex1,echo = TRUE)
 
 ex5 <- paste0(path,"/examples/ex5-penAFT.R")
 source(ex5,echo = TRUE)
