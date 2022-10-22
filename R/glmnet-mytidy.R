@@ -60,13 +60,13 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
                 dev.ratio = x$dev.ratio,
                 df = x$df
               )
-   coefs  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
+   betas  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
        select(-dev.ratio, -lambda)
-       grpd   <- left_join(step_df, coefs, by = "step") %>%  group_by(step) 
-       ret <-  grpd %>% nest(coefs = c(term, estimate))
+       grpd   <- left_join(step_df, betas, by = "step") %>%  group_by(step) 
+       ret <-  grpd %>% nest(beta = c(term, estimate))
    if (inherits(x, "multnet")){
        ret <- grpd %>%  arrange(class) %>% 
-                 nest(coefs = c(term, estimate))
+                 nest(beta = c(term, estimate))
    }
    retx <- left_join(dev, ret, by = "step") 
  return(retx)

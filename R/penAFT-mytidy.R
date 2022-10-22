@@ -53,12 +53,12 @@ mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
    colnames(betax) <- step
    beta_df <- as_tibble(betax)
    beta_df2 <- bind_cols(term = paste0("X", 1:length(x$X.mean)), beta_df)
-   coefs  <- pivot_longer(beta_df2, cols = c(dplyr::everything(), 
+   betas  <- pivot_longer(beta_df2, cols = c(dplyr::everything(), 
                -term), names_to = "step", values_to = "estimate") %>%
                 mutate(step = as.integer(step))
-   if (!return_zeros)  coefs <- filter(coefs, estimate != 0)
-   grpd   <- left_join(step_df, coefs, by = "step") %>%  group_by(step) 
-   retx <-  grpd %>% nest(coefs = c(term, estimate))
+   if (!return_zeros)  betas <- filter(betas, estimate != 0)
+   grpd   <- left_join(step_df, betas, by = "step") %>%  group_by(step) 
+   retx <-  grpd %>% nest(beta = c(term, estimate))
    ret <- left_join(dev, retx, by = "step") 
  return(ret)
 }

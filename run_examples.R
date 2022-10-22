@@ -16,8 +16,6 @@ ex1 <- paste0(path,"/examples/ex1-glmnet.R")
 #source(ex1,echo = TRUE)
 
 ex5 <- paste0(path,"/examples/ex5-penAFT.R")
-dt5 <- paste0(path,"/examples/penAFT_object.Rdata")
-load(file =dt5)
 source(ex5,echo = TRUE)
 
 
