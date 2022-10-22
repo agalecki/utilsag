@@ -49,7 +49,7 @@ mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
                 lambda = x$lambda, 
                )
    beta1 <- penAFT.coef(x, lambda= x$lambda)
-   betax  <- beta$beta
+   betax  <- beta1$beta
    colnames(betax) <- step
    beta_df <- as_tibble(betax)
    beta_df2 <- bind_cols(term = paste0("X", 1:length(x$X.mean)), beta_df)
