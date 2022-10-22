@@ -67,7 +67,7 @@
 #' tidied <- tidy(cvfit1$glmnet.fit)
 #'
 #' 
-#' #' @method mytidy cv.glmnet
+#' @method mytidy cv.glmnet
 #' @export
 #' @family glmnet tidiers
 #' @seealso [tidy()], [glmnet::cv.glmnet()]
