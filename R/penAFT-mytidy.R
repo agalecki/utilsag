@@ -63,3 +63,16 @@ mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
  return(ret)
 }
 
+#' @method myglance penAFT.cv
+#' @export
+myglance.penAFT <- function(x){
+ ret1 <- with(x, 
+        tibble::tibble(
+         alpha    = fullfit$alpha,
+         n_lambda = length(fullfit$lambda),
+         ncolx    = length(fullfit$X.mean),
+         lambda_min = lambda.min
+       ))
+}
+
+

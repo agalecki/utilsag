@@ -28,11 +28,23 @@ cvglmnet_fit_cox = cv.glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
 
 newx_cox <- x_cox[1:10, ]
 
+
+# penAFT
 library(penAFT)
 X <- x_cox
 logY <- log(ty) 
-delta <-  1 - tcens
-#penAFT.en <- penAFT(X = X, logY = logY, delta = delta,
-#                   nlambda = 50, lambda.ratio.min = 0.01,
-#                   penalty = "EN",
-#                   alpha = 1)
+delta <-  1 - tcens    # := status
+
+
+penAFT_object <- penAFT(X = X, logY = logY, delta = delta,
+                   nlambda = 50, lambda.ratio.min = 0.01,
+                   penalty = "EN",
+                   alpha = 0.5)
+
+penAFTcv_object <- penAFT.cv(X = X, logY = logY, delta = delta,
+                   nlambda = 20, lambda.ratio.min = 0.1,
+                   penalty = "EN", nfolds = 5,
+                   alpha = 0.5)
+                   
+save(penAFT_object, penAFTcv_object, file = paste0(path, "/examples/penAFT_objects.Rdata"))
+

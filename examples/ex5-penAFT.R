@@ -10,7 +10,7 @@ ls()
 
 stepx <- c(4,5)
 myglance(penAFT_object)
-(tt <- mytidy(penAFT_object) %>% filter( step %in% stepx))
+(tt <- mytidy(penAFT_object) %>% filter(step %in% stepx))
 tt %>% unnest(beta)
 
 
