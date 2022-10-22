@@ -42,23 +42,24 @@ myglance.penAFT <- function(x){
 #' @export
 
 mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
- step <- 1L:length(x$lambda)
+ step <- as.integer(1:length(x$lambda))
  step_df <- tibble(step = step)
  dev <- tibble( alpha = x$alpha, 
                 step = step,
                 lambda = x$lambda, 
                )
-   beta <- penAFT.coef(x, lambda= x$lambda)
-     beta_d2 <- bind_cols(beta_d, term = paste0("X", 1:length(x$X.mean)))
-   beta_d <- as_tibble(beta$beta)
-   colnames(beta_d) <- 1:ncol(beta_d)
-    coefs <- pivot_longer(beta_d2, cols = c(dplyr::everything(), 
+   beta1 <- penAFT.coef(x, lambda= x$lambda)
+   beta  <- beta$beta
+   colnames(beta) <- step
+   beta_df <- as_tibble(beta)
+   beta_df2 <- bind_cols(term = paste0("X", 1:length(x$X.mean)), beta_df)
+    coefs <- pivot_longer(beta_df2, cols = c(dplyr::everything(), 
                -term), names_to = "step", values_to = "estimate") %>%
                 mutate(step = as.integer(step))
    if (!return_zeros)  coefs <- filter(coefs, estimate != 0)
    grpd   <- left_join(step_df, coefs, by = "step") %>%  group_by(step) 
-   ret <-  grpd %>% nest(coefs = c(term, estimate))
-   retx <- left_join(dev, ret, by = "step") 
- return(retx)
+   retx <-  grpd %>% nest(coefs = c(term, estimate))
+   ret <- left_join(dev, retx, by = "step") 
+ return(ret)
 }
 
