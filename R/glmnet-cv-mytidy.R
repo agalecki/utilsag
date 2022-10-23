@@ -69,7 +69,7 @@
 #' 
 #' @method mytidy cv.glmnet
 #' @export
-#' @family glmnet tidiers
+# -' @family glmnet tidiers
 #' @seealso [tidy()], [glmnet::cv.glmnet()]
 mytidy.cv.glmnet <- function(x, ...) {
   with(
@@ -92,7 +92,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 #'
 #' - @inherit tidy.cv.glmnet params examples
 #'
-#' @evalRd broom:::return_glance("alpha", "lambda.min", "lambda.1se", "nobs", "family")
+# -' @evalRd broom:::return_glance("alpha", "lambda.min", "lambda.1se", "nobs", "family")
 #'
 #' @method myglance cv.glmnet
 #' @export

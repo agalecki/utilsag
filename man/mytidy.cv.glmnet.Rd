@@ -70,17 +70,11 @@ ggplot(tidied_cv, aes(lambda, nzero)) +
 # coefficient plot with min lambda shown
 tidied <- tidy(cvfit1$glmnet.fit)
 
-
-#' @method mytidy cv.glmnet
 \dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=tidy]{tidy()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}
-
-Other glmnet tidiers: 
-\code{\link{myglance.cv.glmnet}()}
 }
-\concept{glmnet tidiers}
 \value{
 A \code{\link[tibble:tibble]{tibble::tibble()}} with columns:
   \item{lambda}{Value of penalty parameter lambda.}
