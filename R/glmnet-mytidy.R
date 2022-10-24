@@ -53,13 +53,14 @@ return(dplyr::bind_cols(ret0,ret1))
 #'   logical. Furthermore, predictions make sense only with a specific
 #'   choice of lambda.
 #' 
+#' @importFrom magrittr `%>%`
 #' @method mytidy glmnet
 #' @export
 
 mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
  step <- 1:length(x$lambda)
  step_df <- tibble::tibble(step = step)
- dev <- tibble( alpha = call_alpha(x), 
+ dev <- tibble::tibble( alpha = call_alpha(x), 
                 step = step,
                 lambda = x$lambda, 
                 dev.ratio = x$dev.ratio,
@@ -67,7 +68,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
               )
    betas  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
        select(-dev.ratio, -lambda)
-       grpd   <- left_join(step_df, betas, by = "step") %>%  group_by(step) 
+       grpd   <- dplyr::left_join(step_df, betas, by = "step") %>%  group_by(step) 
        ret <-  grpd %>% nest(beta = c(term, estimate))
    if (inherits(x, "multnet")){
        ret <- grpd %>%  arrange(class) %>% 

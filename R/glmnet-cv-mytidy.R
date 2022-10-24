@@ -92,7 +92,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 #'
 #' - @inherit tidy.cv.glmnet params examples
 #'
-# -' @evalRd broom:::return_glance("alpha", "lambda.min", "lambda.1se", "nobs", "family")
+# -' @evalRd broom::return_glance("alpha", "lambda.min", "lambda.1se", "nobs", "family")
 #'
 #' @method myglance cv.glmnet
 #' @export
