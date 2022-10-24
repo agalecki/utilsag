@@ -20,7 +20,7 @@ myglance.glmnet <- function(x){
             alpha    = call_alpha(x),
             n_colx   = dim[1]
            ))
-return(bind_cols(ret0,ret1))
+return(dplyr::bind_cols(ret0,ret1))
 }
 
 #' -@templateVar class glmnet
@@ -73,7 +73,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
        ret <- grpd %>%  arrange(class) %>% 
                  nest(beta = c(term, estimate))
    }
-   retx <- left_join(dev, ret, by = "step") 
+   retx <- dplyr::left_join(dev, ret, by = "step") 
  return(retx)
 }
 
