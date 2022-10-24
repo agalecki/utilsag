@@ -7,6 +7,8 @@ path <- "C:/Users/agalecki/Documents/GitHub/utilsag"
 
 library(tidymodels)
 library(utilsag)
+methods("myglance")
+methods("mytidy")
 
 ex0_data <- paste0(path,"/examples/ex0-data.R")
 source(ex0_data)
@@ -16,6 +18,6 @@ ex1 <- paste0(path,"/examples/ex1-glmnet.R")
 source(ex1,echo = TRUE)
 
 ex5 <- paste0(path,"/examples/ex5-penAFT.R")
-source(ex5,echo = TRUE)
+source(ex5, echo = TRUE)
 
 

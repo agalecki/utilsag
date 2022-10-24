@@ -74,7 +74,7 @@
 mytidy.cv.glmnet <- function(x, ...) {
   with(
     x,
-    tibble(
+    tibble::tibble(
       alpha  = call_alpha(x),
       step   = 1:length(lambda),
       lambda = lambda,
@@ -100,7 +100,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 #' @family glmnet tidiers
 myglance.cv.glmnet <- function(x, ...) {
   a <- call_alpha(x)
-  ret0 <- glance(x, ...)
+  ret0 <- broom::glance(x, ...)
   ret <- ret0 %>% mutate(alpha=a, family = family(x),
      index_min = x$index[1], index_1se = x$index[2]) %>% relocate(alpha)
   return(ret)

@@ -12,7 +12,7 @@ return(alpha)
 #' @method myglance glmnet
 #' @export
 myglance.glmnet <- function(x){
- ret0 <- glance(x)
+ ret0 <- broom::glance(x)
  ret1 <- with(x, 
           tibble::tibble(
             family   = family(x), 
@@ -58,7 +58,7 @@ return(bind_cols(ret0,ret1))
 
 mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
  step <- 1:length(x$lambda)
- step_df <- tibble(step = step)
+ step_df <- tibble::tibble(step = step)
  dev <- tibble( alpha = call_alpha(x), 
                 step = step,
                 lambda = x$lambda, 

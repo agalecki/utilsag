@@ -3,7 +3,7 @@ library(glmnet)
 # Gaussian
 x = matrix(rnorm(100 * 20), 100, 20)
 y = rnorm(100)
-glmnet_fit1 = glmnet(x, y)
+glmnet_fit1 = glmnet(x, y, alpha= 0.5)
 
 # multinomial
 g4 = sample(1:4, 100, replace = TRUE)
@@ -28,6 +28,11 @@ cvglmnet_fit_cox = cv.glmnet(x_cox, y_cox, family = "cox", alpha = 0.5)
 
 newx_cox <- x_cox[1:10, ]
 
+# glmnetUtils cva
+
+library(glmnetUtils)
+
+cvaglmnet_fit_cox <- cva.glmnet(x_cox, y_cox, family = "cox")
 
 # penAFT
 library(penAFT)
