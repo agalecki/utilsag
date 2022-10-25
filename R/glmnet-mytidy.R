@@ -53,12 +53,12 @@ return(dplyr::bind_cols(ret0,ret1))
 #'   logical. Furthermore, predictions make sense only with a specific
 #'   choice of lambda.
 #' 
-#' @importFrom tibble tibble
-#' @import magrittr 
-#' @importFrom broom glance tidy
-# -' @ importFrom dplyr select nest group_by arrange
-#' @import dplyr
-#' @import tidyr
+#-' @importFrom tibble tibble
+#-' @import magrittr 
+#-' @importFrom broom glance tidy
+#-' @ importFrom dplyr select nest group_by arrange
+#-' @import dplyr
+#' @import tidymodels
 #' @method mytidy glmnet
 #' @export
 
