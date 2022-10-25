@@ -1,11 +1,12 @@
  
 
 devtools::install_github("agalecki/utilsag")
+
 rm(list = ls())
 
 path <- "C:/Users/agalecki/Documents/GitHub/utilsag"
 
-library(tidymodels)
+#library(tidymodels)
 library(utilsag)
 methods("myglance")
 methods("mytidy")

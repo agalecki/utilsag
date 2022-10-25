@@ -53,7 +53,10 @@ return(dplyr::bind_cols(ret0,ret1))
 #'   logical. Furthermore, predictions make sense only with a specific
 #'   choice of lambda.
 #' 
+#' @importFrom tibble tibble
 #' @importFrom magrittr `%>%`
+#' @importFrom broom glance
+#' @importFrom broom tidy
 #' @method mytidy glmnet
 #' @export
 
