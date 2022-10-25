@@ -102,6 +102,9 @@ myglance.cv.glmnet <- function(x, ...) {
   a <- call_alpha(x)
   ret0 <- broom::glance(x, ...)
   ret <- ret0 %>% mutate(alpha=a, family = family(x),
-     index_min = x$index[1], index_1se = x$index[2]) %>% relocate(alpha)
+     index_min = x$index[1], index_1se = x$index[2],
+     n_lambda = length(x$lambda),
+     n_colx  = length(x$glmnet.fit$dim[1])
+     ) %>% relocate(alpha)
   return(ret)
  }
