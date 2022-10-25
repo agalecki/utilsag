@@ -21,7 +21,7 @@ return(ret)
 mytidy.cva.glmnet <- function(x){
  modlist <- x$modlist
  alpha <- tibble::tibble(alpha = x$alpha)
- ret1 <-  modlist %>%  map_dfc(glance)
+ ret1 <-  modlist %>%  map_dfr(glance)
  
  return(ret1)
 }
