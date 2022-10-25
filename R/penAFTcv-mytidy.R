@@ -16,14 +16,12 @@ myglance.penAFT.cv <- function(x){
 #' @seealso [tidy()], [glmnet::cv.glmnet()]
 
 mytidy.penAFT.cv <- function(x, ...) {
-  with(
-    x,
-    tibble(
+  ret  <- tibble(
       ## alpha  = alpha,
       step   = 1:length(x$lambda),
-      lambda_min = x$lambda.min,
+      lambda = x$lambda,
       estimate = x$cv.err.linPred
     )
-  )
+  
 }
 
