@@ -5,7 +5,8 @@ myglance.penAFT <- function(x){
    with(x, 
         tibble::tibble(
          alpha    = alpha,
-         n_lambda = length(lambda)
+         n_lambda = length(lambda),
+         ncol_x = length(x$X.mean)
        ))
 }
         
@@ -44,7 +45,8 @@ myglance.penAFT <- function(x){
 mytidy.penAFT <- function(x, return_zeros = FALSE, ...) {
  step <- as.integer(1:length(x$lambda))
  step_df <- tibble(step = step)
- dev <- tibble( alpha = x$alpha, 
+ dev <- tibble( 
+                ## alpha = x$alpha, 
                 step = step,
                 lambda = x$lambda, 
                )

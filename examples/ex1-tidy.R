@@ -42,6 +42,14 @@ str(cvglmnet_fit_cox)
 # tidy(cvglmnet_fit_cox) 
 tidy(cvglmnet_fit_cox) %>% mutate(row_id = row_number()) %>% slice(stepx) 
 
+### cvaglmnet_fit_cox
+message("--- cva.glmnet cox ---")
+str(cvaglmnet_fit_cox)
+
+### penAFT
+message("--- penAFT objects ----")
+str(penAFT_object)
+str(penAFTcv_object)
 
 detach(package:dplyr)
 detach(package:tidyr)
