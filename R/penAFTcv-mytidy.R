@@ -1,12 +1,13 @@
 #' @method myglance penAFT.cv
 #' @export
 myglance.penAFT.cv <- function(x){
+ ffit <- x$full.fit
  ret <- with(x, 
         tibble::tibble(
-         alpha    = x$full.fit$alpha,
-         n_lambda = length(x$full.fit$lambda),
+         alpha    = ffit$alpha,
+         n_lambda = length(ffit$lambda),
          lambda_min = x$lambda.min,
-         n_colx    =length(x$full.fit$X.mean)
+         n_colx     = length(ffit$X.mean)
        ))
   return(ret)   
 }
@@ -17,10 +18,11 @@ myglance.penAFT.cv <- function(x){
 #' @seealso [tidy()], [glmnet::cv.glmnet()]
 
 mytidy.penAFT.cv <- function(x, ...) {
+  ffit <- x$full.fit
   ret  <- tibble(
       ## alpha  = alpha,
-      step   = 1:length(x$lambda),
-      lambda = x$lambda,
+      step   = 1:len),
+      lambda = ffit$lambda,
       estimate = x$cv.err.linPred
     )
   return(ret)
