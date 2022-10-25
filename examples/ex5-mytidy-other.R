@@ -23,3 +23,7 @@ myglance(penAFTcv_object)
 mytidy(penAFTcv_object)
 
 
+### cva.glmnet
+
+myglance(cvaglmnet_fit_cox)
+
