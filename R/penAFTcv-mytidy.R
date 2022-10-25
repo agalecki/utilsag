@@ -20,9 +20,9 @@ mytidy.penAFT.cv <- function(x, ...) {
     x,
     tibble(
       ## alpha  = alpha,
-      step   = 1:length(lambda),
-      lambda_min = lambda.min,
-      estimate = cv.err.linPred
+      step   = 1:length(x$lambda),
+      lambda_min = x$lambda.min,
+      estimate = x$cv.err.linPred
     )
   )
 }
