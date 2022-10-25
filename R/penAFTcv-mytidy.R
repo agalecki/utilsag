@@ -21,7 +21,7 @@ mytidy.penAFT.cv <- function(x, ...) {
   ffit <- x$full.fit
   ret  <- tibble(
       ## alpha  = alpha,
-      step   = 1:len),
+      step   = 1:length(ffit$lambda),
       lambda = ffit$lambda,
       estimate = x$cv.err.linPred
     )
