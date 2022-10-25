@@ -1,9 +1,10 @@
 #' @method myglance penAFT.cv
 #' @export
 myglance.penAFT.cv <- function(x){
+ a <- x$alpha
  ret <- with(x, 
         tibble::tibble(
-         alpha    = alpha,
+         alpha    = a,
          n_lambda = length(lambda),
          ncolx    = length(X.mean)
        ))
