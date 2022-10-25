@@ -56,7 +56,9 @@ return(dplyr::bind_cols(ret0,ret1))
 #' @importFrom tibble tibble
 #' @importFrom magrittr `%>%`
 #' @importFrom broom glance tidy
-#' @importFrom dplyr select nest group_by arrange
+# -' @ importFrom dplyr select nest group_by arrange
+#' @import dplyr
+#' @import tidyr
 #' @method mytidy glmnet
 #' @export
 
