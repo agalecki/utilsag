@@ -9,8 +9,19 @@ myglance.cva.glmnet <- function(x){
     n_alpha = length(x$alpha),
     n_folds = x$nfolds,
     family  = xcall$family,
-    n_colx  = modfit1$dim[1]
+    n_colx  = modfit1$dim[1],
+    nobs    = modfit1$nobs
     )
 return(ret)
 }
 
+#' 
+#' @method mytidy cva.glmnet
+#' @export
+mytidy.cva.glmnet <- function(x){
+ modlist <- x$modlist
+ alpha <- tibble::tibble(alpha = x$alpha)
+ ret1 <-  modlist %>%  map_dfc(glance)
+ 
+ return(ret1)
+}

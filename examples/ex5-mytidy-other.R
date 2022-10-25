@@ -26,4 +26,4 @@ mytidy(penAFTcv_object)
 ### cva.glmnet
 
 myglance(cvaglmnet_fit_cox)
-
+mytidy(cvaglmnet_fit_cox)
