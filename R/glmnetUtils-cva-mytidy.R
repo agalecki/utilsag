@@ -10,6 +10,7 @@ myglance.cva.glmnet <- function(x){
     n_folds = x$nfolds,
     family  = callx$family,
     n_colx  = modfit1$dim[1]
+    )
 return(ret)
 }
 
