@@ -64,7 +64,8 @@ return(dplyr::bind_cols(ret0,ret1))
 mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
  step <- 1:length(x$lambda)
  step_df <- tibble::tibble(step = step)
- dev <- tibble::tibble( alpha = call_alpha(x), 
+ dev <- tibble::tibble( 
+                ## alpha = call_alpha(x), 
                 step = step,
                 lambda = x$lambda, 
                 dev.ratio = x$dev.ratio,

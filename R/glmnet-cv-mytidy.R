@@ -75,7 +75,7 @@ mytidy.cv.glmnet <- function(x, ...) {
   with(
     x,
     tibble::tibble(
-      alpha  = call_alpha(x),
+      ## alpha  = call_alpha(x),
       step   = 1:length(lambda),
       lambda = lambda,
       estimate = cvm,
