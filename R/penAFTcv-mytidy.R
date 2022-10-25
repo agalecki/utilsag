@@ -8,6 +8,7 @@ myglance.penAFT.cv <- function(x){
          lambda_min = x$lambda.min,
          n_colx    =length(x$full.fit$X.mean)
        ))
+  return(ret)   
 }
 
 #' @method mytidy penAFT.cv
@@ -22,6 +23,6 @@ mytidy.penAFT.cv <- function(x, ...) {
       lambda = x$lambda,
       estimate = x$cv.err.linPred
     )
-  
+  return(ret)
 }
 
