@@ -100,11 +100,12 @@ mytidy.cv.glmnet <- function(x, ...) {
 #' @family glmnet tidiers
 myglance.cv.glmnet <- function(x, ...) {
   a <- call_alpha(x)
+  ncolx <- x$glmnet.fit$dim[1]
   ret0 <- broom::glance(x, ...)
   ret <- ret0 %>% mutate(alpha=a, family = family(x),
      index_min = x$index[1], index_1se = x$index[2],
      n_lambda = length(x$lambda),
-     n_colx  = length(x$glmnet.fit$dim[1])
+     n_colx  = ncolx
      ) %>% relocate(alpha)
   return(ret)
  }
