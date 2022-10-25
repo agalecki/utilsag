@@ -1,12 +1,12 @@
 #' @method myglance penAFT.cv
 #' @export
 myglance.penAFT.cv <- function(x){
- a <- x$alpha
  ret <- with(x, 
         tibble::tibble(
-         alpha    = a,
-         n_lambda = length(lambda),
-         ncolx    = length(X.mean)
+         alpha    = x$full.fit$alpha,
+         n_lambda = length(x$full.fit$lambda),
+         lambda_min = x$lambda.min,
+         n_colx    =length(x$full.fit$X.mean)
        ))
 }
 
