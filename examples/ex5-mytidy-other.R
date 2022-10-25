@@ -18,8 +18,8 @@ tt %>% unnest(beta)
 
 mytidy(penAFT_object)
 
+myglance(penAFTcv_object)
 
-
-
+mytidy(penAFTcv_object)
 
 

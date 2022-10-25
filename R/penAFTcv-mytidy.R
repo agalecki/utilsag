@@ -1,7 +1,7 @@
 #' @method myglance penAFT.cv
 #' @export
 myglance.penAFT.cv <- function(x){
- ret1 <- with(x, 
+ ret <- with(x, 
         tibble::tibble(
          alpha    = alpha,
          n_lambda = length(lambda),
@@ -18,7 +18,7 @@ mytidy.penAFT.cv <- function(x, ...) {
   with(
     x,
     tibble(
-      alpha  = alpha,
+      ## alpha  = alpha,
       step   = 1:length(lambda),
       lambda_min = lambda.min,
       estimate = cv.err.linPred
