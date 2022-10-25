@@ -54,7 +54,7 @@ return(dplyr::bind_cols(ret0,ret1))
 #'   choice of lambda.
 #' 
 #' @importFrom tibble tibble
-#' @importFrom magrittr `%>%`
+#' @import magrittr 
 #' @importFrom broom glance tidy
 # -' @ importFrom dplyr select nest group_by arrange
 #' @import dplyr
