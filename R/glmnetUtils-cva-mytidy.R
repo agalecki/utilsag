@@ -23,6 +23,6 @@ mytidy.cva.glmnet <- function(x){
  alpha <- tibble::tibble(alpha = x$alpha)
  ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
  
- gfit <-  modlist %>%  map_dfr(modlist, FUNCTION(mod) mytidy(mod$glmnet.fit)) 
+ gfit <-  modlist %>%  map_dfr(FUNCTION(mod) mytidy(mod$glmnet.fit)) 
  return(gfit)
 }
