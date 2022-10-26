@@ -41,7 +41,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest=FALSE, ...){
     }
     # tbl2 <- tbl2 %>% group_by(alpha_idx) %>% nest(steps = c(step, lambda))
     if (i ==1)  print(colnames(tbl2))
-    rturn(left_join(tbl1, tbl2, by = "alpha_idx")
+    return(left_join(tbl1, tbl2, by = "alpha_idx"))
     }
  ret <- alphas %>% map_dfr(funi)          
  # print("---- mytidy.cva.glmnet 11")
