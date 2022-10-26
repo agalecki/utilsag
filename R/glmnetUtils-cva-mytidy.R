@@ -26,7 +26,7 @@ mytidy.cva.glmnet <- function(x){
  print("---- mytidy.cva.glmnet 7")
  ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
  print("---- mytidy.cva.glmnet 11")
- glmnetfit <- apply(modlist, FUN = function(mod) mod$glmnet.fit)
+ glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
  print("---- mytidy.cva.glmnet 15")
 
  gfit <- glmnetfit %>%  map_dfr(mytidy)
