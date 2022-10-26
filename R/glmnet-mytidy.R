@@ -1,12 +1,27 @@
 # Not exported funcs
 
 call_alpha <- function (x){
+ if (inherits(x, "cva.glmnet")) stop("Object inheriting from `cva.glmnet` class is not allowed")
+ if (inherits(x, "penAFT.cva")) stop("Object inheriting from `penAFT.cva` class is not allowed")
+
  xcall <- as.list(x$call)
+ # print(xcall)
  alpha <- xcall$alpha
- if (is.null(alpha)) alpha <-1
+ # print(alpha)
+ is_num <- is.numeric(alpha)
+ is_null <- is.null(alpha)
+ # print(is_num)
+ if (!is_num) (
+    if (is_null) alpha <- 1 else alpha <- NULL 
+  ) 
 return(alpha)
 }
-
+# call_alpha(cvaglmnet_fit_cox)
+# modlist <- cvaglmnet_fit_cox$modlist # cva.glmnet
+# tt1 <- modlist[[1]]                  # cv.glmnet
+# call_alpha(tt1)                      # returns NULL
+# gg1 <- tt1$glmnet.fit                # inherits from glmnet
+# call_alpha(gg1)                      # returns NULL
 
 #' 
 #' @method myglance glmnet
