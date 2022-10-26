@@ -37,7 +37,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, ...){
     tbl2 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, ...)) 
     if (i==1) {
      print(colnames(tbl1))
-     print(colnames(tbl1))
+     print(colnames(tbl2))
     }
     ## tbl2 <- tbl2 %>% group_by(alpha_idx) %>% nest(beta = c(term, estimate))
     left_join(tbl1, tbl2, by = "alpha_idx")
