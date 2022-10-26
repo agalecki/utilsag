@@ -32,7 +32,7 @@ mytidy.cva.glmnet <- function(x){
     print(paste0("i=", i, xalpha[i]))
     print(paste0( ":", myglance(fiti)))
     
-    bind_rows(alpha_idx =i, alpha = xalphai[i], myglance(fiti))          
+    bind_rows(alpha_idx =i, alpha = xalpha[i], myglance(fiti))          
 } 
  ret1 <- alphas %>% map_dfr(fun1)
  # print("---- mytidy.cva.glmnet 11")
