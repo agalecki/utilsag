@@ -99,6 +99,7 @@ mytidy.cv.glmnet <- function(x, ...) {
 #' @seealso [glance()], [glmnet::cv.glmnet()]
 #' @family glmnet tidiers
 myglance.cv.glmnet <- function(x, ...) {
+  print("---> myglance.cv.glmnet starts")
   a <- call_alpha(x)
   ncolx <- x$glmnet.fit$dim[1]
   ret0 <- broom::glance(x, ...)
@@ -107,5 +108,7 @@ myglance.cv.glmnet <- function(x, ...) {
      n_lambda = length(x$lambda),
      n_colx  = ncolx
      ) %>% relocate(alpha)
+     print("---> myglance.cv.glmnet ends")
+  
   return(ret)
  }
