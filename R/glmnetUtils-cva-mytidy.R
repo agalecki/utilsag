@@ -30,7 +30,7 @@ mytidy.cva.glmnet <- function(x){
     modi <- modlist[[i]]
     fiti <- modi$glmnet.fit
     print(paste("i=", i, alphav[i], ":", myglance(fiti)))
-    bind_cols(alpha_idx =i, alpha = alphav[i], myglance(fiti))          
+    bind_rows(alpha_idx =i, alpha = alphav[i], myglance(fiti))          
 } 
  ret1 <- map_dfr(alpha_idx, fun1)
  # print("---- mytidy.cva.glmnet 11")
