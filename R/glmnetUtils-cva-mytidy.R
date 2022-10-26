@@ -26,7 +26,7 @@ mytidy.cva.glmnet <- function(x){
  alpha_idx <- 1:ncol(alphav)
  #print("---- mytidy.cva.glmnet 7")
  #- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
- fun1 <- function(i) bind_cols(alpha_idx =i, alpha = alphav[i], myglance(modlist[[i}]))          
+ fun1 <- function(i) bind_cols(alpha_idx =i, alpha = alphav[i], myglance(modlist[[i]]))          
  ret1 <- alpha_idx %>% map_dfr(fun1)
  # print("---- mytidy.cva.glmnet 11")
  glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
