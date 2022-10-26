@@ -35,7 +35,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, ...){
     tbl1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) %>%
            select(-c(family, nobs, n_colx, nulldev)) 
     tbl2 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, ...)) %>%
-            group_by(alpha_idx, step) %>% nest()
+            group_by(alpha_idx) %>% nest(beta = c(term, estimate))
     left_join(tbl1, tbl2, by = "alpha_idx")
     }
  ret <- alphas %>% map_dfr(funi)          
