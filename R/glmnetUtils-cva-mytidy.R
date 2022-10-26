@@ -27,19 +27,25 @@ mytidy.cva.glmnet <- function(x){
  alphas <- as.list(1:length(xalpha))
  #print("---- mytidy.cva.glmnet 7")
  #- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
- fun1 <- function(i){
+ funi <- function(i){
     modi <- modlist[[i]]
     fiti <- modi$glmnet.fit
     #print(paste0("i=", i, xalpha[i]))
     #print(paste0( ":", myglance(fiti)))
-    tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti))
+    ret1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) %>%
+           select(-c(family, nobs, n_colx, nulldev)) 
+    ret2 <- tibble(alpha_idx =i, mytidy(fiti))
+    ret2
     }
- ret1 <- alphas %>% map_dfr(fun1) %>% select(-c(family, nobs, n_colx, nulldev))          
+ ret <- alphas %>% map_dfr(funi)          
  # print("---- mytidy.cva.glmnet 11")
  glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
  # print("---- mytidy.cva.glmnet 15")
 
- gfit <- glmnetfit %>%  map_dfr(mytidy)
+ # gfit <- glmnetfit %>%  map_dfr(mytidy)
+ 
+ 
+ 
  print("---- mytidy.cva.glmnet ends")
- return(ret1)
+ return(ret)
 }
