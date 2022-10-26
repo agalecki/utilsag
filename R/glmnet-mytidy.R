@@ -33,9 +33,10 @@ myglance.glmnet <- function(x){
           tibble::tibble(
             family   = family(x), 
             n_lambda = length(lambda),
-            alpha    = call_alpha(x),
             n_colx   = dim[1]
-           ))
+        ))
+    a <-  call_alpha(x)      
+    if (!is.null(a)) ret1 <- ret1 %>% mutate(alpha = a)
 return(dplyr::bind_cols(ret0,ret1))
 }
 

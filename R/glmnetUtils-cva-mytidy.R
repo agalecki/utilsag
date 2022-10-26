@@ -20,19 +20,21 @@ return(ret)
 #' @export
 mytidy.cva.glmnet <- function(x){
  print("---- mytidy.cva.glmnet starts")
+ xalpha <- x$alpha
  modlist <- x$modlist
  #print("---- mytidy.cva.glmnet 5")
- alphav <- tibble::tibble(alpha = x$alpha)
- alpha_idx <- as.list(1:ncol(alphav))
+ alphai <- as.list(1:length(xalpha))
  #print("---- mytidy.cva.glmnet 7")
  #- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
  fun1 <- function(i){
     modi <- modlist[[i]]
     fiti <- modi$glmnet.fit
-    print(paste("i=", i, alphav[i], ":", myglance(fiti)))
-    bind_rows(alpha_idx =i, alpha = alphav[i], myglance(fiti))          
+    print(paste0("i=", i, xalpha[i])
+    print(paste0( ":", myglance(fiti))
+    
+    bind_rows(alpha_idx =i, alpha = xalphai[i], myglance(fiti))          
 } 
- ret1 <- map_dfr(alpha_idx, fun1)
+ ret1 <- alphai %>% map_dfr(fun1)
  # print("---- mytidy.cva.glmnet 11")
  glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
  # print("---- mytidy.cva.glmnet 15")
