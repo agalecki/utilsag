@@ -2,7 +2,7 @@
 #' @method myglance cva.glmnet
 #' @export
 myglance.cva.glmnet <- function(x){
- xcall <- x$call
+ xcall <- as.list(x$call)
  mod1 <- x$modlist[[1]]
  modfit1 <- mod1$glmnet.fit
  ret <- tibble::tibble(
