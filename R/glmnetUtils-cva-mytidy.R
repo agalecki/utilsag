@@ -39,7 +39,8 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, ...){
      print(colnames(tbl1))
      print(colnames(tbl2))
     }
-    ## tbl2 <- tbl2 %>% group_by(alpha_idx) %>% nest(beta = c(term, estimate))
+    tbl2 <- tbl2 %>% group_by(alpha_idx) %>% nest(step = c(lambda))
+    if (i ==1)  print(colnames(tbl2))
     left_join(tbl1, tbl2, by = "alpha_idx")
     }
  ret <- alphas %>% map_dfr(funi)          
