@@ -102,6 +102,7 @@ myglance.cv.glmnet <- function(x, ...) {
   print("---> myglance.cv.glmnet starts")
   a <- call_alpha(x)
   print(a)
+  if (!is.numeric(a)) a <- NA
   ncolx <- x$glmnet.fit$dim[1]
   ret0 <- broom::glance(x, ...)
   print(ret0)
