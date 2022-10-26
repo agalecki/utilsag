@@ -88,7 +88,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
                 dev.ratio = x$dev.ratio,
                 df = x$df
               )
-   betas  <- broom::tidy(x, return_zeros = return_zeros, ...) %>%
+   betas  <- broom::tidy(x, return_zeros = return_zeros, nested = TRUE, ...) %>%
        select(-dev.ratio, -lambda)
        grpd   <- dplyr::left_join(step_df, betas, by = "step") %>%  group_by(step) 
        ret    <-  grpd %>% nest(beta = c(term, estimate))
@@ -96,7 +96,8 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
        ret <- grpd %>%  arrange(class) %>% 
                  nest(beta = c(term, estimate))
    }
-   retx <- dplyr::left_join(dev, ret, by = "step") 
+   retx <- dplyr::left_join(dev, ret, by = "step")
+   if (!nested) retx <- retx %>% unnest(beta) 
  return(retx)
 }
 
