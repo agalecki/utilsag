@@ -101,8 +101,10 @@ mytidy.cv.glmnet <- function(x, ...) {
 myglance.cv.glmnet <- function(x, ...) {
   print("---> myglance.cv.glmnet starts")
   a <- call_alpha(x)
+  print(a)
   ncolx <- x$glmnet.fit$dim[1]
   ret0 <- broom::glance(x, ...)
+  print(ret0)
   ret <- ret0 %>% mutate(alpha=a, family = family(x),
      index_min = x$index[1], index_1se = x$index[2],
      n_lambda = length(x$lambda),
