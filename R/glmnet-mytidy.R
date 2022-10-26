@@ -3,7 +3,8 @@
 call_alpha <- function (x){
  if (inherits(x, "cva.glmnet")) stop("Object inheriting from `cva.glmnet` class is not allowed")
  if (inherits(x, "penAFT.cva")) stop("Object inheriting from `penAFT.cva` class is not allowed")
-
+ xalpha <- x$alpha
+ if (is.numeric(xalpha) && length(xalpha) == 1) return(xalpha) 
  xcall <- as.list(x$call)
  # print(xcall)
  alpha <- xcall$alpha

@@ -21,15 +21,18 @@ return(ret)
 mytidy.cva.glmnet <- function(x){
  print("---- mytidy.cva.glmnet starts")
  modlist <- x$modlist
- print("---- mytidy.cva.glmnet 5")
+ #print("---- mytidy.cva.glmnet 5")
  alphav <- tibble::tibble(alpha = x$alpha)
- print("---- mytidy.cva.glmnet 7")
- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
- print("---- mytidy.cva.glmnet 11")
+ alpha_idx <- 1:ncol(alphav)
+ #print("---- mytidy.cva.glmnet 7")
+ #- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
+ fun1 <- function(i) bind_cols(alpha_idx =i, alpha = alphav[i], myglance(modlist[[i}]))          
+ ret1 <- alpha_idx %>% map_dfr(fun1)
+ # print("---- mytidy.cva.glmnet 11")
  glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
- print("---- mytidy.cva.glmnet 15")
+ # print("---- mytidy.cva.glmnet 15")
 
  gfit <- glmnetfit %>%  map_dfr(mytidy)
  print("---- mytidy.cva.glmnet ends")
- return(gfit)
+ return(ret1)
 }
