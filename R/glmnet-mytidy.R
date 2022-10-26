@@ -3,7 +3,7 @@
 call_alpha <- function (x){
  xcall <- as.list(x$call)
  alpha <- xcall$alpha
- if (is.null(alpha)) alpha=1
+ if (is.null(alpha)) alpha <-1
 return(alpha)
 }
 
