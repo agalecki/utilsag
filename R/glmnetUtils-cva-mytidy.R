@@ -23,15 +23,16 @@ mytidy.cva.glmnet <- function(x){
  modlist <- x$modlist
  #print("---- mytidy.cva.glmnet 5")
  alphav <- tibble::tibble(alpha = x$alpha)
- alpha_idx <- 1:ncol(alphav)
+ alpha_idx <- as.list(1:ncol(alphav))
  #print("---- mytidy.cva.glmnet 7")
  #- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
  fun1 <- function(i){
     modi <- modlist[[i]]
     fiti <- modi$glmnet.fit
+    print(paste("i=", i, alphav[i], ":", myglance(fiti))
     bind_cols(alpha_idx =i, alpha = alphav[i], myglance(fiti))          
 } 
- ret1 <- alpha_idx %>% map_dfr(fun1)
+ ret1 <- map_dfr(alph_idx, fun1)
  # print("---- mytidy.cva.glmnet 11")
  glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
  # print("---- mytidy.cva.glmnet 15")
