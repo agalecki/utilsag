@@ -8,7 +8,7 @@ myglance.cva.glmnet <- function(x){
  ret <- tibble::tibble(
     n_alpha = length(x$alpha),
     n_folds = x$nfolds,
-    nulldev = modfit1$null.dev,
+    nulldev = modfit1$nulldev,
     family  = xcall$family,
     n_colx  = modfit1$dim[1],
     nobs    = modfit1$nobs
@@ -30,11 +30,11 @@ mytidy.cva.glmnet <- function(x){
  fun1 <- function(i){
     modi <- modlist[[i]]
     fiti <- modi$glmnet.fit
-    print(paste0("i=", i, xalpha[i]))
-    print(paste0( ":", myglance(fiti)))
+    #print(paste0("i=", i, xalpha[i]))
+    #print(paste0( ":", myglance(fiti)))
     tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti))
     }
- ret1 <- alphas %>% map_dfr(fun1) %>% select(-c(family, nobs, n_colx))          
+ ret1 <- alphas %>% map_dfr(fun1) %>% select(-c(family, nobs, n_colx, nulldev))          
  # print("---- mytidy.cva.glmnet 11")
  glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
  # print("---- mytidy.cva.glmnet 15")
