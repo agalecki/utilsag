@@ -78,7 +78,7 @@ return(dplyr::bind_cols(ret0,ret1))
 #' @method mytidy glmnet
 #' @export
 
-mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
+mytidy.glmnet <- function(x, return_zeros = FALSE, nested = TRUE, ...) {
  step <- 1:length(x$lambda)
  step_df <- tibble::tibble(step = step)
  dev <- tibble::tibble( 
@@ -88,7 +88,7 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, ...) {
                 dev.ratio = x$dev.ratio,
                 df = x$df
               )
-   betas  <- broom::tidy(x, return_zeros = return_zeros, nested = TRUE, ...) %>%
+   betas  <- broom::tidy(x, return_zeros = return_zeros,  ...) %>%
        select(-dev.ratio, -lambda)
        grpd   <- dplyr::left_join(step_df, betas, by = "step") %>%  group_by(step) 
        ret    <-  grpd %>% nest(beta = c(term, estimate))
