@@ -19,7 +19,7 @@ return(ret)
 #' 
 #' @method mytidy cva.glmnet
 #' @export
-mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest_df = character(0), ...){
+mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), ...){
  print("---- mytidy.cva.glmnet starts")
  xalpha <- x$alpha
  modlist <- x$modlist
@@ -35,7 +35,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest_df = character(0)
     tbl1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) # %>%
            # select(-c(family, nobs, n_colx, nulldev))
     tbl1 %>% print(n=1000)
-    tbl2 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest_df = unnest_df, ...))  
+    tbl2 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = unnest, ...))  
     if (i==1) {
      print(colnames(tbl1))
      print(colnames(tbl2))
