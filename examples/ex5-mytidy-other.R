@@ -28,6 +28,6 @@ mytidy(penAFTcv_object)
 myglance(cvaglmnet_fit_cox)
 mytidy(cvaglmnet_fit_cox) %>% print(n=1000)
 
-mytidy(cvaglmnet_fit_cox, unnest = "beta")
+mytidy(cvaglmnet_fit_cox, unnest = "beta") %>% tail(100) %>% print(n=100)
 
 

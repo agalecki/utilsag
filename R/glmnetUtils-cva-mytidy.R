@@ -20,7 +20,7 @@ return(ret)
 #' @method mytidy cva.glmnet
 #' @export
 mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), ...){
- print("---- mytidy.cva.glmnet starts")
+ #print("---- mytidy.cva.glmnet starts")
  xalpha <- x$alpha
  modlist <- x$modlist
  #print("---- mytidy.cva.glmnet 5")
@@ -37,22 +37,15 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
     # tbl1 %>% print(n=1000)
     tbl2 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = unnest, ...))  
     if (i==1) {
-     print(colnames(tbl1))
-     print(colnames(tbl2))
+ #    print(colnames(tbl1))
+ #    print(colnames(tbl2))
     }
     # tbl2 <- tbl2 %>% group_by(alpha_idx) %>% nest(steps = c(step, lambda))
-    if (i ==1)  print(colnames(tbl2))
+    #   if (i ==1)  print(colnames(tbl2))
     return(left_join(tbl1, tbl2, by = "alpha_idx"))
     }
  ret <- alphas %>% map_dfr(funi)          
- # print("---- mytidy.cva.glmnet 11")
- # glmnetfit <- lapply(modlist, FUN = function(mod) mod$glmnet.fit)
- # print("---- mytidy.cva.glmnet 15")
-
- # gfit <- glmnetfit %>%  map_dfr(mytidy)
- 
- 
- 
- print("---- mytidy.cva.glmnet ends")
+    
+ #print("---- mytidy.cva.glmnet ends")
  return(ret)
 }
