@@ -26,8 +26,8 @@ mytidy(penAFTcv_object)
 ### cva.glmnet
 
 myglance(cvaglmnet_fit_cox)
-mytidy(cvaglmnet_fit_cox)
-(all_df <- mytidy(cvaglmnet_fit_cox, unnest = "beta"))
+mytidy(cvaglmnet_fit_cox) %>% print(n=1000)
 
-all_df %>% print(n=1000)
+mytidy(cvaglmnet_fit_cox, unnest = "beta")
+
 
