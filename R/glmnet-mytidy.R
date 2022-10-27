@@ -78,7 +78,7 @@ return(dplyr::bind_cols(ret0,ret1))
 #' @method mytidy glmnet
 #' @export
 
-mytidy.glmnet <- function(x, return_zeros = FALSE, unnest = NULL, ...) {
+mytidy.glmnet <- function(x, return_zeros = FALSE, _unnest = NULL, ...) {
  step <- 1:length(x$lambda)
  step_df <- tibble::tibble(step = step)
  dev <- tibble::tibble( 
@@ -97,7 +97,8 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, unnest = NULL, ...) {
                  nest(beta = c(term, estimate))
    }
    retx <- dplyr::left_join(dev, ret, by = "step")
-   if (unnest == "beta") retx <- retx %>% unnest(beta) 
+   
+   if (_unnest == "beta") retx <- retx %>% unnest(beta) 
  return(retx)
 }
 
