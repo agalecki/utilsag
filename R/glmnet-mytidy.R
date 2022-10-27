@@ -97,7 +97,8 @@ mytidy.glmnet <- function(x, return_zeros = FALSE, unnest_df = character(0), ...
                  nest(beta = c(term, estimate))
    }
    retx <- dplyr::left_join(dev, ret, by = "step")
-   
+   print(unnest_df)
+   print(retx)
    if (unnest_df == "beta") retx <- retx %>% unnest(beta) 
  return(retx)
 }
