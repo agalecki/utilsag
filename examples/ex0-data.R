@@ -56,6 +56,14 @@ delta <-  1 - tcens    # := status
 #                   nlambda = 20, lambda.ratio.min = 0.1,
 #                   penalty = "EN", nfolds = 5,
 #                   alpha = 0.5)
-                   
-#save(penAFT_object, penAFTcv_object, file = paste0(path, "/examples/penAFT_objects.Rdata"))
+
+library(utilsag)
+
+# alphav <- seq(0, 1, len = 11)^3
+# penAFTcva_object <- penAFT.cva(x=X, logY = logY, delta = delta,
+#                 alpha = alphav,
+#                 nlambda = 50, lambda.ratio.min = 0.1, lambda = NULL,
+#                 penalty = "EN", nfolds = 5, seed = 1234)
+
+#save(penAFT_object, penAFTcv_object, penAFTcva_object, file = paste0(path, "\\penAFT_objects.Rdata"))
 
