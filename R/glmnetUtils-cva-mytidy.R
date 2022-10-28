@@ -42,10 +42,10 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = FALSE, ...){
     
     # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta
     
-     tt3 <- mytidy(fiti, return_zeros = return_zeros, unnest = FALSE, ...) 
-     lmbda <- tt3 %>% select(lambda)
-     tt3 <-  tt3 %>% select(-c(lambda))
-     tbl3 <- tibble(a_idx = i, lambda = lmbda, tt3)
+     tt3   <- mytidy(fiti, return_zeros = return_zeros, unnest = FALSE, ...) 
+     step3 <- tt3 %>% select(step)
+     tt3   <- tt3 %>% select(-c(step))
+     tbl3  <- tibble(a_idx = i, step = step3, tt3)
      print(colnames(tbl3))
     ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
     ret  <- left_join(ret1, tbl3, by = c("a_idx", "step"))
