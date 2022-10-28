@@ -72,11 +72,12 @@
 # -' @family glmnet tidiers
 #' @seealso [tidy()], [glmnet::cv.glmnet()]
 mytidy.cv.glmnet <- function(x, ...) {
+  # returns one row per lambda(step)
   with(
     x,
     tibble::tibble(
       ## alpha  = call_alpha(x),
-      step   = 1:length(lambda),
+      step   = 1:length(lambda),  
       lambda = lambda,
       estimate = cvm,
       std.error = cvsd,
