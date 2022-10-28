@@ -37,7 +37,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
               
       tbl1_cv <- tibble(a_idx =i, myglance(modi)) 
       print(colnames(tbl1_cv))
-      tbl1_cv <- tbl1_cv %>% select(-c( n_lambda)) # columns included in myglance
+      tbl1_cv <- tbl1_cv %>% select(-c( n_lambda, nobs, n_colx, family, index_min, index_1se)) # columns included in myglance
        
       left_join(tbl1_x, tbl1_cv, by = "a_idx")
    } 
