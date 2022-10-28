@@ -28,14 +28,14 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
     modi <- modlist[[i]]       # cv.glmnet
     fiti <- modi$glmnet.fit    # "coxnet" "glmnet"
   
-    tbl1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
+    tbl1 <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
               select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
-    tbl2 <- tibble(alpha_idx = i, mytidy(modi))
-    tbl3 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = "beta", ...)) %>%
+    tbl2 <- tibble(a_idx = i, mytidy(modi))
+    tbl3 <- tibble(a_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = "beta", ...)) %>%
               rename(beta_hat = estimate)
     
-    ret1 <- left_join(tbl1, tbl2, by = "alpha_idx") 
-    ret  <- left_join(ret1, tbl3, by = "alpha_idx")
+    ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
+    ret  <- left_join(ret1, tbl3, by = "a_idx")
     ret
  }
  ret <- alphas %>% map_dfr(funi)          
