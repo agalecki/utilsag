@@ -39,7 +39,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = character(1), ..
     tbl3 <- tibble(a_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = character(1), ...))
     
     ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
-    ret  <- left_rows(ret1, tbl3, by = c("a_idx", "step"))
+    ret  <- left_join(ret1, tbl3, by = c("a_idx", "step"))
     ret
  }
  ret <- alphas %>% map_dfr(funi)          
