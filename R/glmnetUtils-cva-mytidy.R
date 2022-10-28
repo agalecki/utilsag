@@ -34,10 +34,10 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
               select(-c(family, nobs, n_colx, nulldev)) # redundant columns (included in `myglance`)
               
       tbl1_cv <- tibble(a_idx =i, myglance(modi))  %>% 
-                   select(-c( n_lambda, alpha)) # columns included in myglance
+                   select(-c( n_lambda)) # columns included in myglance
       print("fun_alpha")
-      colnames(tbl1_x)
-      colnames(tbl1_cv)
+      #colnames(tbl1_x)
+      #colnames(tbl1_cv)
       left_join(tbl1_x, tbl1_cv, by = "a_idx")
    } 
      
@@ -47,7 +47,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
          grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
          tbl_cv  <- grpd %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
          print("fun_cv")
-         colnames(tbl_cv)
+         # colnames(tbl_cv)
          tbl_cv
     } 
     
