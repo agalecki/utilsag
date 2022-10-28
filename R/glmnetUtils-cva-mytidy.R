@@ -29,10 +29,12 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
     fiti <- modi$glmnet.fit    # "coxnet" "glmnet"
   
     tbl1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
-            select(-c(family, nobs, n_colx, nulldev)) # not needed included in myglance
-    tbl3 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = "beta", ...)) 
+              select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
+    tbl2 <- tibble(alpha_idx = i, mytidy(modi))
+    tbl3 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = "beta", ...)) %>%
+              rename(beta_hat = estimate)
     
-    ret <- left_join(tbl1, tbl3, by = "alpha_idx")
+    ret <- left_join(tbl1, tbl2, tbl3, by = "alpha_idx")
     ret
  }
  ret <- alphas %>% map_dfr(funi)          

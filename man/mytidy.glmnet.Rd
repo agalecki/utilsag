@@ -4,7 +4,7 @@
 \alias{mytidy.glmnet}
 \title{-@templateVar class glmnet}
 \usage{
-\method{mytidy}{glmnet}(x, return_zeros = FALSE, ...)
+\method{mytidy}{glmnet}(x, return_zeros = FALSE, unnest = character(1), ...)
 }
 \arguments{
 \item{x}{A \code{glmnet} object returned from \code{\link[glmnet:glmnet]{glmnet::glmnet()}}.}
