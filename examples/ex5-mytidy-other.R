@@ -27,8 +27,8 @@ mytidy(penAFTcv_object)
 
 myglance(cvaglmnet_fit_cox)
 
-mytidy(cvaglmnet_fit_cox) %>% tail(20)
+mytidy(cvaglmnet_fit_cox) # %>% tail(20)
 
-mytidy(cvaglmnet_fit_cox, unnest = "beta") %>% tail(100) %>% print(n=100)
+# mytidy(cvaglmnet_fit_cox, unnest = "beta") %>% tail(100) %>% print(n=100)
 
 

@@ -23,7 +23,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
  #print("---- mytidy.cva.glmnet starts")
  xalpha <- x$alpha
  modlist <- x$modlist
- ## alphas <- as.list(1:length(xalpha))
+ alphas <- as.list(1:length(xalpha))
   funi <- function(i){
     modi <- modlist[[i]]       # cv.glmnet
     fiti <- modi$glmnet.fit    # "coxnet" "glmnet"
@@ -35,7 +35,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
     ret <- left_join(tbl1, tbl3, by = "alpha_idx")
     ret
  }
- ret <- xalpha %>% map_dfr(funi)          
+ ret <- alphas %>% map_dfr(funi)          
     
  #print("---- mytidy.cva.glmnet ends")
  return(ret)
