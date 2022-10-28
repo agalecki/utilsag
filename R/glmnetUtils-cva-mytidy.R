@@ -36,7 +36,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = FALSE, ...){
      # -group_by(step) 
      # -   ret    <-  grpd %>% nest(beta = c(term, estimate))
      
-     grpd <- tibble(a_idx = i, model = mytidy(modi)) %>% group_by(step)
+     grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
      tbl2  <- grpd %>% nest(model_info = c(estimate, std.error, conf.low, conf.high))
     
     # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta 
