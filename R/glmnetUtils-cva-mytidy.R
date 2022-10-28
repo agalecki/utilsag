@@ -30,14 +30,14 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
       fiti <- modi$glmnet.fit    # "glmnet"
   
       # tbl1 contains one row per alpha (indexed by a_idx)
-      tbl1_x <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
-              select(-c(family, nobs, n_colx, nulldev)) # redundant columns (included in `myglance`)
+      tbl1_x <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) 
+      print("fun_alpha")
+      colnames(tbl1_x)
+      tbl1_x <- tbl1_x %>% select(-c(family, nobs, n_colx, nulldev)) # redundant columns (included in `myglance`)
               
       tbl1_cv <- tibble(a_idx =i, myglance(modi))  %>% 
                    select(-c( n_lambda)) # columns included in myglance
-      #print("fun_alpha")
-      #colnames(tbl1_x)
-      #colnames(tbl1_cv)
+       #colnames(tbl1_cv)
       left_join(tbl1_x, tbl1_cv, by = "a_idx")
    } 
      
