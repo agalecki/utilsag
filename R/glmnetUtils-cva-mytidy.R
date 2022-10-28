@@ -33,11 +33,9 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = FALSE, ...){
               select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
     
     # tbl2 contains one row per a_idx by (lambda) step combination  
-     # -group_by(step) 
-     # -   ret    <-  grpd %>% nest(beta = c(term, estimate))
      
      grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
-     tbl2  <- grpd %>% nest(step_info = c(estimate, std.error, conf.low, conf.high))
+     tbl2  <- grpd %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
      print(colnames(tbl2))
     
     # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta
