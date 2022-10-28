@@ -19,7 +19,7 @@ return(ret)
 #' 
 #' @method mytidy cva.glmnet
 #' @export
-mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), ...){
+mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = character(1), ...){
  #print("---- mytidy.cva.glmnet starts")
  xalpha <- x$alpha
  modlist <- x$modlist
@@ -28,14 +28,18 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
     modi <- modlist[[i]]       # cv.glmnet
     fiti <- modi$glmnet.fit    # "coxnet" "glmnet"
   
+    # tbl1 contains one row per alpha (indexed by a_idx)
     tbl1 <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
               select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
+    
+    # tbl2 contains one row per a_idx by (lambda) step combination         
     tbl2 <- tibble(a_idx = i, mytidy(modi))
-    tbl3 <- tibble(a_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = "beta", ...)) %>%
-              rename(beta_hat = estimate)
+    
+    # tbl3 contains one row per a_idx x (lambda) step combination wit nested beta 
+    tbl3 <- tibble(a_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = character(1), ...))
     
     ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
-    ret  <- left_join(ret1, tbl3, by = "a_idx")
+    ret  <- bind_cols(ret1, tbl3)
     ret
  }
  ret <- alphas %>% map_dfr(funi)          
