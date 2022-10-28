@@ -19,45 +19,55 @@ return(ret)
 #' 
 #' @method mytidy cva.glmnet
 #' @export
-mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = FALSE, alpha_info = FALSE,...){
+mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_info = FALSE,...){
  #print("---- mytidy.cva.glmnet starts")
  xalpha <- x$alpha
  modlist <- x$modlist
  alphas <- as.list(1:length(xalpha))
-  funi <- function(i){
-    modi <- modlist[[i]]       # cv.glmnet
-    fiti <- modi$glmnet.fit    # "coxnet" "glmnet"
+ 
+   fun_alpha <- function(i){
+      modi <- modlist[[i]]       # cv.glmnet
+      fiti <- modi$glmnet.fit    # "glmnet"
   
-    # tbl1 contains one row per alpha (indexed by a_idx)
-    tbl1x <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
-              select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
+      # tbl1 contains one row per alpha (indexed by a_idx)
+      tbl1_x <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
+              select(-c(family, nobs, n_colx, nulldev)) # redundant columns (included in `myglance`)
               
-    tbl1_cv <- tibble(a_idx =i, alpha = xalpha[i], myglance(modi)) # %>% 
-                 # select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
-    colnames(tbl1x)
-    colnames(tbl1_cv)
-    tbl1 <-   full_join(tbl1x, tbl1_cv, by = "a_idx")          
-    
-    # tbl2 contains one row per a_idx by (lambda) step combination  
+      tbl1_cv <- tibble(a_idx =i, myglance(modi)) # %>% 
+                  # select(-c( n_lambda, alpha)) # columns not needed included in myglance
+      print("fun_alpha")
+      colnames(tbl1_x)
+      colnames(tbl1_cv)
+      left_join(tbl1_x, tbl1_cv, by = "a_idx")
+   } 
      
-     grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
-     tbl2  <- grpd %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
-     #print(colnames(tbl2))
+    # tbl_cv contains one row per a_idx by (lambda) step combination  
+    fun_cv <- function(i){
+         modi <- modlist[[i]]       # cv.glmnet
+         grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
+         tbl_cv  <- grpd %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
+         print("fun_cv")
+         colnames(tbl_cv)
+         tbl_cv
+    } 
     
     # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta
-    
+    fun_x <- function(i){
+     fiti <- modi$glmnet.fit    #  "glmnet" 
      tt3   <- mytidy(fiti, return_zeros = return_zeros, unnest = FALSE, ...) 
      step3 <- as.integer(tt3$step) 
      tt3   <- tt3 %>% select(-c(step, lambda))
      tbl3  <- tibble(a_idx = i, step = step3, tt3)
      # print(colnames(tbl3))
-    ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
-    ret  <- left_join(ret1, tbl3, by = c("a_idx", "step"))
+    ret  <- ret1 
     ret
  }
- ret <- alphas %>% map_dfr(funi)
- if (unnest) ret <- unnest("beta", "step_info")
-    
+ 
+    tbl_alpha <- alphas %>% map_dfr(fun_alpha)
+    tbl_cv    <- alphas %>% map_dfr(fun_cv)
+    if (unnest) tbl_cv <- tbl_cv %>% unnest(step)
+    tbl_beta  <- alphas %>% map_dfr(fun_x)
+    if (unnest) tbl_beta <- tbl_beta %>% unnest(beta)
+    list(alpha_info = tbl_alpha, glmnet.cv = tbl_cv, glmnet = tbl_beta)
  #print("---- mytidy.cva.glmnet ends")
- return(ret)
 }
