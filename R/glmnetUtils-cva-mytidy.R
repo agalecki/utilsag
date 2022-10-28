@@ -37,13 +37,13 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = FALSE, ...){
      # -   ret    <-  grpd %>% nest(beta = c(term, estimate))
      
      grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
-     tbl2  <- grpd %>% nest(model_info = c(estimate, std.error, conf.low, conf.high))
+     tbl2  <- grpd %>% nest(step_info = c(estimate, std.error, conf.low, conf.high))
      print(colnames(tbl2))
     
     # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta
     
      tt3   <- mytidy(fiti, return_zeros = return_zeros, unnest = FALSE, ...) 
-     step3 <- tt3 %>% select(step)
+     step3 <- tt3 %>% select(step) %>% mutate(step = as.integer(step))
      tt3   <- tt3 %>% select(-c(step))
      tbl3  <- tibble(a_idx = i, step = step3, tt3)
      print(colnames(tbl3))
