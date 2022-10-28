@@ -53,14 +53,14 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
     
     # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta
     fun_x <- function(i){
+     modi <- modlist[[i]]       # cv.glmnet
      fiti <- modi$glmnet.fit    #  "glmnet" 
      tt3   <- mytidy(fiti, return_zeros = return_zeros, unnest = FALSE, ...) 
      step3 <- as.integer(tt3$step) 
      tt3   <- tt3 %>% select(-c(step, lambda))
      tbl3  <- tibble(a_idx = i, step = step3, tt3)
      # print(colnames(tbl3))
-    ret  <- ret1 
-    ret
+     tbl3
  }
  
     tbl_alpha <- alphas %>% map_dfr(fun_alpha)
