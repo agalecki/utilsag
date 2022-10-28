@@ -23,28 +23,19 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE,  unnest = character(1), .
  #print("---- mytidy.cva.glmnet starts")
  xalpha <- x$alpha
  modlist <- x$modlist
- #print("---- mytidy.cva.glmnet 5")
- alphas <- as.list(1:length(xalpha))
- #print("---- mytidy.cva.glmnet 7")
- #- ret1 <-  modlist %>%  map_dfr(myglance) # `myglance` applied to  `cv.glmnet` class
- funi <- function(i){
-    modi <- modlist[[i]]
-    fiti <- modi$glmnet.fit
-    #print(paste0("i=", i, xalpha[i]))
-    #print(paste0( ":", myglance(fiti)))
-    tbl1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) %>%
-            select(-c(family, nobs, n_colx, nulldev)) # included in my glance
-    # tbl1 %>% print(n=1000)
-    tbl2 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = unnest, ...))  
-    if (i==1) {
- #    print(colnames(tbl1))
- #    print(colnames(tbl2))
-    }
-    # tbl2 <- tbl2 %>% group_by(alpha_idx) %>% nest(steps = c(step, lambda))
-    #   if (i ==1)  print(colnames(tbl2))
-    return(left_join(tbl1, tbl2, by = "alpha_idx"))
-    }
- ret <- alphas %>% map_dfr(funi)          
+ ## alphas <- as.list(1:length(xalpha))
+  funi <- function(i){
+    modi <- modlist[[i]]       # cv.glmnet
+    fiti <- modi$glmnet.fit    # "coxnet" "glmnet"
+  
+    tbl1 <- tibble(alpha_idx =i, alpha = xalpha[i], myglance(fiti)) %>% 
+            select(-c(family, nobs, n_colx, nulldev)) # not needed included in myglance
+    tbl3 <- tibble(alpha_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = "beta", ...)) 
+    
+    ret <- left_join(tbl1, tbl3, by = "alpha_idx")
+    ret
+ }
+ ret <- xalpha %>% map_dfr(funi)          
     
  #print("---- mytidy.cva.glmnet ends")
  return(ret)
