@@ -33,9 +33,9 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = character(1), ..
               select(-c(family, nobs, n_colx, nulldev)) # columns not needed included in myglance
     
     # tbl2 contains one row per a_idx by (lambda) step combination         
-    tbl2 <- tibble(a_idx = i, mytidy(modi))
+    tbl2 <- tibble(a_idx = i, model = mytidy(modi))
     
-    # tbl3 contains one row per a_idx x (lambda) step combination wit nested beta 
+    # tbl3 contains one row per a_idx x (lambda) step combination with nested list beta 
     tbl3 <- tibble(a_idx = i, mytidy(fiti, return_zeros = return_zeros, unnest = character(1), ...))
     
     ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
