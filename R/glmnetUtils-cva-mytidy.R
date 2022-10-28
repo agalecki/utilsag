@@ -45,8 +45,8 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
     # tbl_cv contains one row per a_idx by (lambda) step combination  
     fun_cv <- function(i){
          modi <- modlist[[i]]       # cv.glmnet
-         grpd <- tibble(a_idx = i, mytidy(modi)) %>% group_by(step)
-         tbl_cv  <- grpd %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
+         tbl_cv <- tibble(a_idx = i, mytidy(modi)) 
+         tbl_cv <- tbl_cv %>% group_by(step) %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
          #print("fun_cv")
          # colnames(tbl_cv)
          tbl_cv
@@ -66,7 +66,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
  
     tbl_alpha <- alphas %>% map_dfr(fun_alpha)
     tbl_cv    <- alphas %>% map_dfr(fun_cv)
-    if (unnest) tbl_cv <- tbl_cv %>% unnest(step)
+    if (unnest) tbl_cv <- tbl_cv %>% unnest(step_info)
     tbl_beta  <- alphas %>% map_dfr(fun_x)
     if (unnest) tbl_beta <- tbl_beta %>% unnest(beta)
     list(alpha_info = tbl_alpha, glmnet.cv = tbl_cv, glmnet = tbl_beta)
