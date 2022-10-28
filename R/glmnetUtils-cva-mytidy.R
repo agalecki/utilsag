@@ -44,9 +44,9 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = FALSE, ...){
     
      tt3   <- mytidy(fiti, return_zeros = return_zeros, unnest = FALSE, ...) 
      step3 <- as.integer(tt3$step) 
-     tt3   <- tt3 %>% select(-c(step))
+     tt3   <- tt3 %>% select(-c(step, lambda))
      tbl3  <- tibble(a_idx = i, step = step3, tt3)
-     print(colnames(tbl3))
+     # print(colnames(tbl3))
     ret1 <- left_join(tbl1, tbl2, by = "a_idx") 
     ret  <- left_join(ret1, tbl3, by = c("a_idx", "step"))
     ret
