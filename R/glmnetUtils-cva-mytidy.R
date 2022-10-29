@@ -63,10 +63,12 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
      # print(colnames(tbl3))
      tbl3
  }
- 
+    print("---tbl_alpha")
     tbl_alpha <- alphas %>% map_dfr(fun_alpha)
+    print("---tbl_cv")
     tbl_cv    <- alphas %>% map_dfr(fun_cv)
     if (unnest) tbl_cv <- tbl_cv %>% unnest(step_info)
+    print("---tbl_beta")
     tbl_beta  <- alphas %>% map_dfr(fun_x)
     if (unnest) tbl_beta <- tbl_beta %>% unnest(beta)
     list(alpha_info = tbl_alpha, glmnet.cv = tbl_cv, glmnet = tbl_beta)
