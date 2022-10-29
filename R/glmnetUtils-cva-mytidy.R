@@ -16,7 +16,7 @@ myglance.cva.glmnet <- function(x){
 return(ret)
 }
 
-#' 
+#' importFrom purrr map_dfr
 #' @method mytidy cva.glmnet
 #' @export
 mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_info = FALSE,...){
@@ -46,7 +46,7 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
     fun_cv <- function(i){
          modi <- modlist[[i]]       # cv.glmnet
          tbl_cv <- tibble(a_idx = i, mytidy(modi)) 
-         tbl_cv <- tbl_cv %>% group_by(step) %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
+         tbl_cv <- tbl_cv %>% group_by(alpha) %>% nest(step_info = c(nzero, estimate, std.error, conf.low, conf.high))
          #print("fun_cv")
          # colnames(tbl_cv)
          tbl_cv
