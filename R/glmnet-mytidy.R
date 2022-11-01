@@ -73,7 +73,7 @@ return(dplyr::bind_cols(ret0,ret1))
 #' @importFrom tibble tibble
 #' @importFrom magrittr `%>%`
 #' @importFrom broom glance tidy
-#' @importFrom dplyr select group_by arrange rename
+#' @importFrom dplyr select group_by arrange rename mutate
 #' @importFrom tidyr nest
 #' @method mytidy glmnet
 #' @export
