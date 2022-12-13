@@ -1,0 +1,53 @@
+
+# `survivalROC_helper()` function
+# source: (https://datascienceplus.com/time-dependent-roc-for-survival-prediction-models-in-r)
+
+## Define a helper function to evaluate at various t
+
+#' @export
+survivalROC_helper <- function(t, data_test, markr) {
+    survivalROC(Stime        = data_test$time,
+                status       = data_test$status,
+                marker       = data_test[[markr]],
+                predict.time = t,
+                method       = "NNE",
+                span = 0.25 * nrow(data_test)^(-0.20))
+}
+
+
+# `create_survivalROC_data()` function 
+
+
+create_survivalROC_data <- function(tvec, cmarker){ 
+    # Ex. cmarker = "lp_M2"
+    tibble(t = tvec) %>%
+    mutate(survivalROC = map(t, survivalROC_helper, markr = cmarker),
+           ## Extract scalar AUC
+           auc = map_dbl(survivalROC, magrittr::extract2, "AUC"),
+           ## Put cut off dependent values in a data_frame
+           df_survivalROC = map(survivalROC, function(obj) {
+               as_tibble(obj[c("cut.values","TP","FP")])
+           })) %>%
+           select(-survivalROC) %>%
+    unnest(df_survivalROC) %>%
+    arrange(t, FP, TP)
+    }
+
+
+# Auxiliary `plot_timedep_ROC()` function to Plot Time-dependent ROC is defined
+
+
+plot_timedep_ROC <- function(surv_ROC_data){
+ surv_ROC_data %>%
+    ggplot(mapping = aes(x = FP, y = TP)) +
+    geom_point() +
+    geom_line() +
+    geom_label(data = surv_ROC_data %>% select(t, auc) %>% unique,
+               mapping = aes(label = sprintf("%.3f", auc)), x = 0.5, y = 0.5) +
+    facet_wrap( ~ t) +
+    theme_bw() +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5),
+          legend.key = element_blank(),
+          plot.title = element_text(hjust = 0.5),
+          strip.background = element_blank())
+    }     
