@@ -3,20 +3,25 @@
 # source: (https://datascienceplus.com/time-dependent-roc-for-survival-prediction-models-in-r)
 
 ## Define a helper function to evaluate at various t
+# Not @export
 
-#' @export
-survivalROC_helper <- function(t, data_test, markr) {
-    survivalROC(Stime        = data_test$time,
-                status       = data_test$status,
-                marker       = data_test[[markr]],
+survivalROC_helper <- function(t, data, marker, time = time, status = status) {
+    mm <- as.character(substitute(marker))
+    tt <- as.character(substitute(time))
+    ss <- as.character(substitute(status))
+    survivalROC::survivalROC(Stime = data[[tt]],
+                status       = data[[ss]],
+                marker       = data[[mm]],
                 predict.time = t,
                 method       = "NNE",
-                span = 0.25 * nrow(data_test)^(-0.20))
+                span = 0.25 * nrow(data)^(-0.20))
 }
+
+# dtx <-survivalROC_helper(15, dt, disp)    
+#names(dtx)
 
 
 # `create_survivalROC_data()` function 
-
 
 create_survivalROC_data <- function(tvec, cmarker){ 
     # Ex. cmarker = "lp_M2"
