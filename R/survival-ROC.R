@@ -16,8 +16,6 @@ survivalROC_helper <- function(t, data, marker, time = time, status = status) {
     if (!str_detect(cnms, ss)) exit <- TRUE
     if (exit) stop("One(or more) variables:", mm, tt, ss, " not found in ", data) 
     
-    stop("Variable ", mm, " not found"
-    
     survivalROC::survivalROC(Stime = data[[tt]],
                 status       = data[[ss]],
                 marker       = data[[mm]],
