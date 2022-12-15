@@ -16,14 +16,12 @@ survivalROC_helper <- function(t, data, mm, tt, ss) {
 }
 
 
-
 #' `create_survivalROC_data()` function 
 
 #' @export
 create_survivalROC_data <- function(tvec, data, marker, time = time, status=status){
-
-    # Ex. cmarker = "lp_M2"
-       mm <- as.character(substitute(marker))
+        dnm <- as.character(substitute(data))
+        mm <- as.character(substitute(marker))
         tt <- as.character(substitute(time))
         ss <- as.character(substitute(status))
         cnms <- colnames(data)
@@ -32,7 +30,7 @@ create_survivalROC_data <- function(tvec, data, marker, time = time, status=stat
         if (!any(cnms == tt)) exit <- TRUE
         if (!any(cnms == ss)) exit <- TRUE
     
-        if (exit) stop("One(or more) variables:", mm, tt, ss, " not found in ", data) 
+        if (exit) stop("One(or more) variables: ", mm, ", ", tt, ", ", ss, " not found in ", dnm) 
 
     tibble(t = tvec) %>%
     mutate(survivalROC = map(t, survivalROC_helper, data = data, mm = mm, tt=tt, ss=ss),
