@@ -2,17 +2,12 @@
 % Please edit documentation in R/glmnet-cv-mytidy.R
 \name{myglance.cv.glmnet}
 \alias{myglance.cv.glmnet}
-\title{\itemize{
-\item @ templateVar class cv.glmnet
-\item @ template title_desc_glance
-}}
+\title{myglance cv.glmnet}
 \usage{
 \method{myglance}{cv.glmnet}(x, ...)
 }
 \description{
-\itemize{
-\item @inherit tidy.cv.glmnet params examples
-}
+myglance cv.glmnet(2)
 }
 \seealso{
 \code{\link[=glance]{glance()}}, \code{\link[glmnet:cv.glmnet]{glmnet::cv.glmnet()}}

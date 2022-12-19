@@ -2,9 +2,7 @@
 % Please edit documentation in R/glmnet-cv-mytidy.R
 \name{mytidy.cv.glmnet}
 \alias{mytidy.cv.glmnet}
-\title{\subsection{-@ templateVar class cv.glmnet
--@ template title_desc_tidy}{
-}}
+\title{mytidy.cv.glmnet}
 \usage{
 \method{mytidy}{cv.glmnet}(x, ...)
 }
@@ -15,8 +13,7 @@
 }}
 }
 \description{
-\subsection{-@ templateVar class cv.glmnet
--@ template title_desc_tidy}{
+\subsection{mytidy.cv.glmne2t}{
 }
 }
 \examples{
