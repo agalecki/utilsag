@@ -1,5 +1,9 @@
-#' -@ templateVar class cv.glmnet
-#' -@ template title_desc_tidy
+#' mytidy.cv.glmnet
+#'
+#' 
+#' mytidy.cv.glmne2t
+# -@ templateVar class cv.glmnet
+# -@ template title_desc_tidy
 #'- 
 #' @param x A `cv.glmnet` object returned from [glmnet::cv.glmnet()].
 #' - @ template param_unused_dots
@@ -88,10 +92,15 @@ mytidy.cv.glmnet <- function(x, ...) {
   )
 }
 
-#' - @ templateVar class cv.glmnet
-#' - @ template title_desc_glance
+
+#' myglance cv.glmnet
 #'
-#' - @inherit tidy.cv.glmnet params examples
+#' myglance cv.glmnet(2)
+#'
+# @ templateVar class cv.glmnet
+# @ template title_desc_glance
+#'
+#   @inherit tidy.cv.glmnet params examples
 #'
 # -' @evalRd broom::return_glance("alpha", "lambda.min", "lambda.1se", "nobs", "family")
 #'
