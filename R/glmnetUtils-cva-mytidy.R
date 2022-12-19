@@ -31,12 +31,12 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
   
       # tbl1 contains one row per alpha (indexed by a_idx)
       tbl1_x <- tibble(a_idx =i, alpha = xalpha[i], myglance(fiti)) 
-      print("fun_alpha")
-      print(colnames(tbl1_x))
+      #print("fun_alpha")
+      #print(colnames(tbl1_x))
       tbl1_x <- tbl1_x %>% select(-c(family, nobs, n_colx, nulldev)) # redundant columns (included in `myglance`)
               
       tbl1_cv <- tibble(a_idx =i, myglance(modi)) 
-      print(colnames(tbl1_cv))
+      #print(colnames(tbl1_cv))
       tbl1_cv <- tbl1_cv %>% select(-c( n_lambda, nobs, n_colx, family, index_min, index_1se)) # columns included in myglance
        
       left_join(tbl1_x, tbl1_cv, by = "a_idx")
@@ -63,14 +63,17 @@ mytidy.cva.glmnet <- function(x, return_zeros = FALSE, unnest = TRUE , alpha_inf
      # print(colnames(tbl3))
      tbl3
  }
-    print("---tbl_alpha")
+    #print("---tbl_alpha")
     tbl_alpha <- alphas %>% map_dfr(fun_alpha)
-    print("---tbl_cv")
+    #print("---tbl_cv")
     tbl_cv    <- alphas %>% map_dfr(fun_cv)
     if (unnest) tbl_cv <- tbl_cv %>% unnest(step_info)
-    print("---tbl_beta")
+    #print("---tbl_beta")
     tbl_beta  <- alphas %>% map_dfr(fun_x)
     if (unnest) tbl_beta <- tbl_beta %>% unnest(beta)
-    list(alpha_info = tbl_alpha, glmnet.cv = tbl_cv, glmnet = tbl_beta)
+    res <- list(alpha_info = tbl_alpha, glmnet.cv = tbl_cv, glmnet_beta = tbl_beta)
+    message("--- List with alpha_info, glmnet.cv, glmnet_beta components created")
+    res
+    
  #print("---- mytidy.cva.glmnet ends")
 }
